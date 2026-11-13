@@ -1,17 +1,21 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Agendar cita en Clínica Veterinaria Huellitas">
-    <link rel="icon" href="/HuellitasIcono.ico" type="image/x-icon">
+    <link rel="icon" href="/HuellitasIcono.ico?v=20261113b" type="image/x-icon">
     <link rel="stylesheet" href="/estilos.css">
+    <link rel="stylesheet" href="/citas-modern.css?v=20261113b">
     <title>Agendar cita | Veterinaria Huellitas</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 
-<body>
+<body class="pagina-citas">
 
 <div class="topbar">
     <div class="topbar-contenido">
@@ -40,7 +44,7 @@
            aria-label="Ir al inicio">
 
                 <span class="marca-icono">
-                    <img src="/Huellitas.png" alt="Huellitas">
+                    <img src="/Huellitas.png?v=20261113b" alt="Huellitas">
                 </span>
 
             <span>
@@ -86,9 +90,8 @@
                 Contacto
             </a>
 
-            <a href="/login" class="boton-login">
-                Iniciar sesión
-            </a>
+            <a href="/login" class="boton-login" sec:authorize="isAnonymous()" data-i18n="menuLogin">Iniciar sesión</a>
+            <a href="/panel" class="boton-login" sec:authorize="isAuthenticated()" data-i18n="menuPanel">Mi panel</a>
 
             <div class="selector-idioma">
 
@@ -115,180 +118,89 @@
 
 </header>
 
-<main>
+<main id="contenido-citas">
+  <div class="contenedor">
+    <section class="citas-hero" aria-labelledby="citas-titulo">
+      <div class="citas-hero-texto">
+        <span class="citas-eyebrow" data-i18n="citasMini">CITAS</span>
+        <h1 id="citas-titulo" data-i18n="citasTitulo">Agenda una cita para tu mascota</h1>
+        <p data-i18n="citasIntro">Selecciona la mascota, el servicio, la fecha y la hora de atención.</p>
+        <div class="citas-hero-pistas"><span>✓ <span data-i18n="citasHeroSeguro">Agenda protegida</span></span><span>♡ <span data-i18n="citasHeroCuidado">Atención personalizada</span></span></div>
+      </div>
+      <div class="citas-hero-imagen"><img src="/mascotas-servicios.png" alt="Perro y gato juntos" loading="eager"></div>
+    </section>
 
-    <div class="contenedor">
-
-        <section class="cabecera-pagina revelar">
-
-                <span class="mini" data-i18n="citasMini">
-                    CITAS
-                </span>
-
-            <h1 data-i18n="citasTitulo">
-                Agenda una cita para tu mascota
-            </h1>
-
-            <p data-i18n="citasIntro">
-                Selecciona la mascota, el servicio,
-                la fecha y la hora de atención.
-            </p>
-
-        </section>
-
-        <section class="seccion limpia revelar">
-
-            <form id="formCita"
-                  class="formulario formulario-amplio">
-
-                <fieldset>
-
-                    <legend data-i18n="citasPropietario">
-                        Datos del propietario
-                    </legend>
-
-                    <div class="campo">
-
-                        <label for="cedulaCita"
-                               data-i18n="citasCedula">
-                            Cédula del propietario
-                        </label>
-
-                        <input type="text"
-                               id="cedulaCita"
-                               name="cedula"
-                               placeholder="Digite la cédula"
-                               data-i18n-placeholder="citasPlaceholderCedula"
-                               required>
-
-                    </div>
-
-                    <button type="button"
-                            id="btnBuscarMascotas"
-                            class="boton boton-secundario"
-                            data-i18n="citasBuscar">
-                        Buscar mascotas
-                    </button>
-
-                </fieldset>
-
-                <fieldset>
-
-                    <legend data-i18n="citasDatos">
-                        Datos de la cita
-                    </legend>
-
-                    <div class="form-grid">
-
-                        <div class="campo">
-
-                            <label for="mascotaCita"
-                                   data-i18n="citasMascota">
-                                Mascota
-                            </label>
-
-                            <select id="mascotaCita"
-                                    name="id_mascota"
-                                    required>
-
-                                <option value=""
-                                        data-i18n="citasPrimeroCedula">
-                                    Primero busque por cédula
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="campo">
-
-                            <label for="servicioCita"
-                                   data-i18n="citasServicio">
-                                Servicio
-                            </label>
-
-                            <select id="servicioCita"
-                                    name="id_servicio"
-                                    required>
-
-                                <option value=""
-                                        data-i18n="citasSeleccioneServicio">
-                                    Seleccione un servicio
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="campo">
-
-                            <label for="fechaCita"
-                                   data-i18n="citasFecha">
-                                Fecha
-                            </label>
-
-                            <input type="date"
-                                   id="fechaCita"
-                                   name="fecha"
-                                   required>
-
-                        </div>
-
-                        <div class="campo">
-
-                            <label for="horaCita"
-                                   data-i18n="citasHora">
-                                Hora
-                            </label>
-
-                            <input type="time"
-                                   id="horaCita"
-                                   name="hora"
-                                   required>
-
-                        </div>
-
-                    </div>
-
-                    <div class="campo">
-
-                        <label for="observacionesCita"
-                               data-i18n="citasObservaciones">
-                            Observaciones
-                        </label>
-
-                        <textarea id="observacionesCita"
-                                  name="observaciones"
-                                  rows="5"
-                                  placeholder="Indique cualquier detalle importante"
-                                  data-i18n-placeholder="citasPlaceholderObservaciones"></textarea>
-
-                    </div>
-
-                </fieldset>
-
-                <div class="acciones-form">
-
-                    <button type="reset"
-                            class="boton boton-secundario"
-                            data-i18n="citasLimpiar">
-                        Limpiar
-                    </button>
-
-                    <button type="submit"
-                            class="boton boton-principal"
-                            data-i18n="citasAgendar">
-                        Agendar cita
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
+    <div class="citas-acceso" sec:authorize="!hasAnyRole('ADMIN','RECEPCIONISTA')">
+      <span class="citas-acceso-icono" aria-hidden="true">🔐</span>
+      <h2 data-i18n="citasAccesoTitulo">Agenda de uso interno</h2>
+      <p data-i18n="citasAcceso">Las citas se programan con el personal de Recepción. Inicia sesión con una cuenta autorizada o contacta con la clínica.</p>
+      <div class="citas-botones"><a href="/login" class="citas-boton citas-boton--primario" data-i18n="menuLogin">Iniciar sesión</a><a href="/contacto" class="citas-boton citas-boton--secundario" data-i18n="menuContacto">Contacto</a></div>
     </div>
 
+    <div class="citas-distribucion" sec:authorize="hasAnyRole('ADMIN','RECEPCIONISTA')">
+      <section class="citas-panel" aria-labelledby="citas-formulario-titulo">
+        <div class="citas-panel-encabezado"><span class="citas-eyebrow" data-i18n="citasFormularioMini">FORMULARIO DE CITAS</span><h2 id="citas-formulario-titulo" data-i18n="citasFormularioTitulo">Programa una atención</h2><p data-i18n="citasFormularioDescripcion">Completa los datos para guardar la cita en el sistema.</p></div>
+        <form id="formCita" method="post" th:action="@{/api/citas}" class="citas-formulario">
+          <fieldset class="citas-paso">
+            <legend><span class="citas-paso-numero">01</span><span data-i18n="citasPasoUno">Buscar al propietario</span></legend>
+            <p class="citas-paso-ayuda" data-i18n="citasPasoUnoTexto">Escribe la cédula para encontrar las mascotas registradas.</p>
+            <div class="citas-busqueda">
+              <div class="campo"><label for="cedulaCita" data-i18n="citasCedula">Cédula del propietario</label><input type="text" id="cedulaCita" name="cedula" placeholder="Digite la cédula" data-i18n-placeholder="citasPlaceholderCedula" autocomplete="off" required></div>
+              <button type="button" id="btnBuscarMascotas" class="citas-boton citas-boton--busqueda" data-i18n="citasBuscar">Buscar mascotas</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="citas-paso">
+            <legend><span class="citas-paso-numero">02</span><span data-i18n="citasPasoDos">Detalles de la cita</span></legend>
+            <p class="citas-paso-ayuda" data-i18n="citasPasoDosTexto">Elige la mascota, el servicio y el veterinario responsable.</p>
+            <div class="citas-grid">
+              <div class="campo"><label for="mascotaCita" data-i18n="citasMascota">Mascota</label><select id="mascotaCita" name="id_mascota" required><option value="" data-i18n="citasPrimeroCedula">Primero busque por cédula</option></select></div>
+              <div class="campo"><label for="servicioCita" data-i18n="citasServicio">Servicio</label><select id="servicioCita" name="id_servicio" required><option value="" data-i18n="citasSeleccioneServicio">Seleccione un servicio</option></select></div>
+              <div class="campo"><label for="veterinarioCita" data-i18n="citasVeterinario">Veterinario</label><select id="veterinarioCita" name="id_veterinario" required><option value="" data-i18n="citasSeleccioneVeterinario">Seleccione un veterinario</option></select></div>
+              <div class="campo"><label for="duracionCita" data-i18n="citasDuracion">Duración (minutos)</label><input id="duracionCita" name="duracion_minutos" type="number" min="1" max="1440" value="30" required></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="citas-paso">
+            <legend><span class="citas-paso-numero">03</span><span data-i18n="citasPasoTres">Fecha y horario</span></legend>
+            <p class="citas-paso-ayuda" data-i18n="citasPasoTresTexto">Selecciona una fecha futura y una hora para la consulta.</p>
+            <div class="citas-grid">
+              <div class="campo"><label for="fechaCita" data-i18n="citasFecha">Fecha</label><input type="date" id="fechaCita" name="fecha" required></div>
+              <div class="campo"><label for="horaCita" data-i18n="citasHora">Hora</label><input type="time" id="horaCita" name="hora" required></div>
+            </div>
+            <p class="citas-ayuda-horarios" data-i18n="citasHorarioAviso">La disponibilidad del veterinario se confirma al guardar. Si existe otra cita en ese horario, el sistema te avisará.</p>
+          </fieldset>
+
+          <fieldset class="citas-paso citas-paso--ultimo">
+            <legend><span class="citas-paso-numero">04</span><span data-i18n="citasPasoCuatro">Motivo y observaciones</span></legend>
+            <div class="campo"><label for="motivoCita" data-i18n="citasMotivo">Motivo de consulta</label><input id="motivoCita" name="motivo_consulta" type="text" maxlength="255" placeholder="Ej.: revisión, vacuna o control" data-i18n-placeholder="citasMotivoEjemplo" required></div>
+            <div class="campo"><label for="observacionesCita" data-i18n="citasObservaciones">Observaciones</label><textarea id="observacionesCita" name="observaciones" rows="4" maxlength="5000" placeholder="Indique cualquier detalle importante" data-i18n-placeholder="citasPlaceholderObservaciones"></textarea></div>
+          </fieldset>
+
+          <div class="citas-acciones"><button type="reset" class="citas-boton citas-boton--secundario" data-i18n="citasLimpiar">Limpiar</button><button type="submit" class="citas-boton citas-boton--primario" data-i18n="citasAgendar">Agendar cita</button></div>
+        </form>
+      </section>
+
+      <aside class="citas-lateral" aria-labelledby="citas-resumen-titulo">
+        <section class="citas-resumen">
+          <span class="citas-eyebrow" data-i18n="citasResumenMini">TU RESERVA</span>
+          <h2 id="citas-resumen-titulo" data-i18n="citasResumenTitulo">Resumen de la cita</h2>
+          <p data-i18n="citasResumenSubtitulo">Aquí verás los datos mientras completas el formulario.</p>
+          <div class="citas-resumen-lista">
+            <div><span data-i18n="citasResumenCedula">Propietario (cédula)</span><strong id="resumen-cedula">Sin seleccionar</strong></div>
+            <div><span data-i18n="citasMascota">Mascota</span><strong id="resumen-mascota">Sin seleccionar</strong></div>
+            <div><span data-i18n="citasServicio">Servicio</span><strong id="resumen-servicio">Sin seleccionar</strong></div>
+            <div><span data-i18n="citasVeterinario">Veterinario</span><strong id="resumen-veterinario">Sin seleccionar</strong></div>
+            <div><span data-i18n="citasFecha">Fecha</span><strong id="resumen-fecha">Sin seleccionar</strong></div>
+            <div><span data-i18n="citasHora">Hora</span><strong id="resumen-hora">Sin seleccionar</strong></div>
+            <div><span data-i18n="citasDuracion">Duración (minutos)</span><strong id="resumen-duracion">30 min</strong></div>
+          </div>
+          <div class="citas-resumen-pie"><span aria-hidden="true">🔒</span><span data-i18n="citasResumenNota">Resumen informativo. La cita se registra únicamente al presionar «Agendar cita».</span></div>
+        </section>
+        <section class="citas-ayuda"><span class="citas-ayuda-icono" aria-hidden="true">♡</span><h3 data-i18n="citasAyudaTitulo">Atendemos con cariño</h3><p data-i18n="citasAyudaTexto">Revisa los datos antes de confirmar. Puedes volver al panel en cualquier momento.</p><a href="/panel" data-i18n="citasVolverPanel">Volver a mi panel ↗</a></section>
+      </aside>
+    </div>
+  </div>
 </main>
 
 <footer>
@@ -369,6 +281,7 @@
 </footer>
 
 <script src="/js/script.js"></script>
+<script src="/js/citas-resumen.js?v=20261113b"></script>
 
 </body>
 </html>

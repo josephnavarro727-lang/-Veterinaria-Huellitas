@@ -51,16 +51,17 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 HttpMethod.GET,
-                                "/api/servicios",
-                                "/api/mascotas/**"
+                                "/api/servicios"
                         ).permitAll()
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/contacto",
-                                "/api/registrar",
-                                "/api/citas"
+                                "/api/registrar"
                         ).permitAll()
+
+                        .requestMatchers("/api/mascotas/**", "/api/veterinarios", "/api/citas")
+                        .hasAnyRole("ADMIN", "RECEPCIONISTA")
 
                         .requestMatchers("/admin/**")
                         .hasRole("ADMIN")
@@ -72,14 +73,6 @@ public class SecurityConfig {
                         .hasAnyRole("ADMIN", "VETERINARIO")
 
                         .anyRequest().authenticated()
-                )
-
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(
-                                "/api/contacto",
-                                "/api/registrar",
-                                "/api/citas"
-                        )
                 )
 
                 .formLogin(form -> form
@@ -101,7 +94,27 @@ public class SecurityConfig {
                 )
 
                 .exceptionHandling(ex -> ex
-                        .accessDeniedPage("/acceso-denegado")
+                        .authenticationEntryPoint((request, response, exception) -> {
+                            if (request.getRequestURI().startsWith(request.getContextPath() + "/api/")) {
+                                response.setStatus(401);
+                                response.setContentType("application/json;charset=UTF-8");
+                                response.getWriter().write("{\"mensaje\":\"Inicia sesión para continuar.\"}");
+                            } else {
+                                new org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint("/login")
+                                        .commence(request, response, exception);
+                            }
+                        })
+                        .accessDeniedHandler((request, response, exception) -> {
+                            if (request.getRequestURI().startsWith(request.getContextPath() + "/api/")) {
+                                response.setStatus(403);
+                                response.setContentType("application/json;charset=UTF-8");
+                                response.getWriter().write("{\"mensaje\":\"No tienes permiso o la sesión del formulario venció. Recarga la página.\"}");
+                            } else {
+                                var handler = new org.springframework.security.web.access.AccessDeniedHandlerImpl();
+                                handler.setErrorPage("/acceso-denegado");
+                                handler.handle(request, response, exception);
+                            }
+                        })
                 );
 
         return http.build();

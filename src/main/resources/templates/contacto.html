@@ -1,14 +1,18 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Veterinaria Huellitas: atención, prevención y bienestar para tus mascotas.">
-    <link rel="icon" href="/HuellitasIcono.ico" type="image/x-icon">
+    <link rel="icon" href="/HuellitasIcono.ico?v=20261113b" type="image/x-icon">
     <link rel="stylesheet" href="/estilos.css">
+    <link rel="stylesheet" href="/contacto-modern.css?v=2">
     <title>Contacto | Veterinaria Huellitas</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 
 <body>
@@ -30,7 +34,7 @@
 
         <a class="marca" href="/" aria-label="Ir al inicio">
                 <span class="marca-icono">
-                    <img src="/Huellitas.png" alt="Huellitas">
+                    <img src="/Huellitas.png?v=20261113b" alt="Huellitas">
                 </span>
 
             <span>
@@ -72,9 +76,8 @@
                 Contacto
             </a>
 
-            <a href="/login" class="boton-login">
-                Iniciar sesión
-            </a>
+            <a href="/login" class="boton-login" sec:authorize="isAnonymous()" data-i18n="menuLogin">Iniciar sesión</a>
+            <a href="/panel" class="boton-login" sec:authorize="isAuthenticated()" data-i18n="menuPanel">Mi panel</a>
 
             <div class="selector-idioma">
                 <select id="selectorIdioma">
@@ -88,282 +91,104 @@
     </div>
 </header>
 
-<main>
-
-    <div class="contenedor">
-
-        <section class="cabecera-pagina revelar">
-
-                <span class="mini"
-                      data-i18n="contactoMini">
-                    Hablemos
-                </span>
-
-            <h1 data-i18n="contactoTitulo">
-                Contacto
-            </h1>
-
-            <p data-i18n="contactoIntro">
-                Escríbenos, revisa nuestro horario o abre la ubicación
-                directamente en Google Maps.
-            </p>
-
-        </section>
-
-        <section class="seccion limpia revelar">
-
-            <div class="contacto-tarjetas">
-
-                <article class="contacto-card">
-
-                    <img class="icono-contacto"
-                         src="/telefono.png"
-                         alt="Teléfono">
-
-                    <div>
-                        <h3 data-i18n="labelTelefono">
-                            Teléfono
-                        </h3>
-
-                        <p>
-                            8888-8888
-                        </p>
-                    </div>
-
-                </article>
-
-                <article class="contacto-card">
-
-                    <img class="icono-contacto"
-                         src="/correo.png"
-                         alt="Correo electrónico">
-
-                    <div>
-                        <h3 data-i18n="labelCorreo">
-                            Correo electrónico
-                        </h3>
-
-                        <p>
-                            veterinaria@huellitas.com
-                        </p>
-                    </div>
-
-                </article>
-
-                <article class="contacto-card">
-
-                    <img class="icono-contacto"
-                         src="/reloj.png"
-                         alt="Horario">
-
-                    <div>
-                        <h3 data-i18n="contactoHorarioTitulo">
-                            Horario
-                        </h3>
-
-                        <p data-i18n="contactoHorarioTexto">
-                            Lunes a sábado · 8:00 a. m. – 6:00 p. m.
-                        </p>
-                    </div>
-
-                </article>
-
-            </div>
-
-            <div class="centrado">
-
-                <a class="boton boton-whatsapp"
-                   href="https://wa.me/50688888888"
-                   target="_blank"
-                   data-i18n="contactoWhatsapp">
-                    Contactar por WhatsApp
-                </a>
-
-            </div>
-
-        </section>
-
-        <section class="contacto-grid revelar">
-
-            <div class="panel-contacto">
-
-                    <span class="mini"
-                          data-i18n="contactoVisitanos">
-                        Visítanos
-                    </span>
-
-                <div class="titulo-con-icono">
-
-                    <img class="icono-titulo"
-                         src="/Ubicacion.png"
-                         alt="Ubicación">
-
-                    <h2 data-i18n="contactoUbicacionTitulo">
-                        Nuestra ubicación
-                    </h2>
-
-                </div>
-
-                <p data-i18n="contactoUbicacionTexto">
-                    San Isidro de El General, Pérez Zeledón,
-                    Costa Rica.
-                </p>
-
-                <div class="mapa">
-
-                    <iframe
-                            src="https://www.google.com/maps?q=San%20Isidro%20de%20El%20General,%20Perez%20Zeledon,%20Costa%20Rica&amp;output=embed"
-                            title="Ubicación de Veterinaria Huellitas"
-                            loading="lazy"
-                            allowfullscreen>
-                    </iframe>
-
-                </div>
-
-                <a class="boton boton-secundario"
-                   href="https://www.google.com/maps/search/?api=1&amp;query=San+Isidro+de+El+General+Perez+Zeledon+Costa+Rica"
-                   target="_blank"
-                   data-i18n="contactoAbrirMaps">
-                    Abrir en Google Maps
-                </a>
-
-            </div>
-
-            <div class="panel-contacto">
-
-                    <span class="mini"
-                          data-i18n="contactoConsultaMini">
-                        Consulta
-                    </span>
-
-                <h2 data-i18n="contactoFormularioTitulo">
-                    Envíanos un mensaje
-                </h2>
-
-                <form class="formulario"
-                      id="formContacto">
-
-                    <div class="campo">
-
-                        <label for="nombre"
-                               data-i18n="labelNombre">
-                            Nombre
-                        </label>
-
-                        <input type="text"
-                               id="nombre"
-                               name="nombre"
-                               placeholder="Digite su nombre"
-                               data-i18n-placeholder="phNombre"
-                               required>
-
-                    </div>
-
-                    <div class="campo">
-
-                        <label for="correo"
-                               data-i18n="labelCorreo">
-                            Correo electrónico
-                        </label>
-
-                        <input type="email"
-                               id="correo"
-                               name="correo"
-                               placeholder="ejemplo@correo.com"
-                               data-i18n-placeholder="phCorreo"
-                               required>
-
-                    </div>
-
-                    <div class="campo">
-
-                        <label for="telefono"
-                               data-i18n="labelTelefono">
-                            Teléfono
-                        </label>
-
-                        <input type="tel"
-                               id="telefono"
-                               name="telefono"
-                               placeholder="8888-8888">
-
-                    </div>
-
-                    <div class="campo">
-
-                        <label for="motivo"
-                               data-i18n="contactoMotivo">
-                            Motivo de la consulta
-                        </label>
-
-                        <select id="motivo"
-                                name="motivo"
-                                required>
-
-                            <option value=""
-                                    data-i18n="contactoSeleccione">
-                                Seleccione una opción
-                            </option>
-
-                            <option value="Consulta veterinaria"
-                                    data-i18n="servicioConsultaTitulo">
-                                Consulta veterinaria
-                            </option>
-
-                            <option value="Vacunación"
-                                    data-i18n="servicioVacunacionTitulo">
-                                Vacunación
-                            </option>
-
-                            <option value="Baño y cuidado"
-                                    data-i18n="servicioBanoTitulo">
-                                Baño y cuidado
-                            </option>
-
-                            <option value="Emergencia"
-                                    data-i18n="servicioEmergenciasTitulo">
-                                Emergencia
-                            </option>
-
-                            <option value="Otro"
-                                    data-i18n="opOtro">
-                                Otro
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="campo">
-
-                        <label for="mensaje"
-                               data-i18n="contactoMensaje">
-                            Mensaje
-                        </label>
-
-                        <textarea id="mensaje"
-                                  name="mensaje"
-                                  rows="5"
-                                  placeholder="Escriba aquí su consulta..."
-                                  data-i18n-placeholder="phMensaje"
-                                  required></textarea>
-
-                    </div>
-
-                    <button class="boton boton-principal boton-ancho"
-                            type="submit"
-                            data-i18n="contactoEnviar">
-                        Enviar consulta
-                    </button>
-
-                </form>
-
-            </div>
-
-        </section>
-
+<main class="pagina-contacto" id="contenido-contacto">
+  <div class="contenedor">
+    <section class="contacto-hero revelar" aria-labelledby="contacto-titulo">
+      <div class="contacto-hero__texto">
+        <span class="contacto-eyebrow" data-i18n="contactoMini">Hablemos</span>
+        <h1 id="contacto-titulo" data-i18n="contactoTitulo">Contacto</h1>
+        <p data-i18n="contactoIntro">Escríbenos, revisa nuestro horario o abre la ubicación directamente en Google Maps.</p>
+        <div class="contacto-hero__acciones">
+          <a class="contacto-btn contacto-btn--principal" href="#formContacto" data-i18n="contactoHeroMensaje">✉ Enviar un mensaje</a>
+          <a class="contacto-btn contacto-btn--claro" href="/citas" data-i18n="contactoHeroCita">Ver agenda de citas</a>
+        </div>
+      </div>
+      <div class="contacto-hero__imagen" aria-hidden="true">
+        <img src="/mascotas-servicios.png" alt="" loading="eager">
+      </div>
+    </section>
+
+    <section class="contacto-infos revelar" aria-label="Formas de contacto">
+      <article class="contacto-info">
+        <span class="contacto-info__icono" aria-hidden="true"><img src="/telefono.png" alt=""></span>
+        <div><span class="contacto-info__etiqueta" data-i18n="labelTelefono">Teléfono</span>
+          <h2>8888-8888</h2><p data-i18n="contactoInfoTelefono">Llámanos durante el horario de atención</p></div>
+      </article>
+      <article class="contacto-info">
+        <span class="contacto-info__icono" aria-hidden="true"><img src="/correo.png" alt=""></span>
+        <div><span class="contacto-info__etiqueta" data-i18n="labelCorreo">Correo electrónico</span>
+          <h2>veterinaria@huellitas.com</h2><p data-i18n="contactoInfoCorreo">Escríbenos con tus consultas</p></div>
+      </article>
+      <article class="contacto-info">
+        <span class="contacto-info__icono" aria-hidden="true"><img src="/reloj.png" alt=""></span>
+        <div><span class="contacto-info__etiqueta" data-i18n="contactoHorarioTitulo">Horario</span>
+          <h2 data-i18n="contactoHorarioBreve">Lunes a sábado</h2><p data-i18n="contactoHorarioTexto">Lunes a sábado · 8:00 a. m. – 6:00 p. m.</p></div>
+      </article>
+    </section>
+
+    <div class="contacto-intro-seccion revelar">
+      <span class="contacto-eyebrow" data-i18n="contactoConsultaMini">Consulta</span>
+      <h2 data-i18n="contactoSeccionTitulo">Estamos para escucharte</h2>
+      <p data-i18n="contactoSeccionTexto">Elige cómo prefieres comunicarte o escríbenos desde el formulario.</p>
     </div>
 
+    <section class="contacto-contenido revelar">
+      <div class="contacto-columna">
+        <article class="contacto-bloque contacto-bloque--mapa">
+          <div class="contacto-bloque__cabecera">
+            <div class="contacto-bloque__icono" aria-hidden="true">📍</div>
+            <div><span class="contacto-eyebrow" data-i18n="contactoVisitanos">Visítanos</span>
+              <h2 data-i18n="contactoUbicacionTitulo">Nuestra ubicación</h2></div>
+          </div>
+          <p class="contacto-direccion" data-i18n="contactoUbicacionTexto">San Isidro de El General, Pérez Zeledón, Costa Rica.</p>
+          <div class="contacto-mapa mapa">
+            <iframe src="https://www.google.com/maps?q=San%20Isidro%20de%20El%20General,%20Perez%20Zeledon,%20Costa%20Rica&amp;output=embed" title="Mapa de referencia de San Isidro de El General" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+          <p class="contacto-aclaracion" data-i18n="contactoMapaAviso">El mapa señala una zona de referencia; no confirma una dirección exacta de la clínica.</p>
+          <a class="contacto-btn contacto-btn--claro contacto-boton-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=San+Isidro+de+El+General+Perez+Zeledon+Costa+Rica" target="_blank" rel="noopener noreferrer" data-i18n="contactoAbrirMaps">Abrir en Google Maps</a>
+        </article>
+        <article class="contacto-bloque contacto-ayuda">
+          <div class="contacto-ayuda__icono" aria-hidden="true">💚</div>
+          <div>
+            <h2 data-i18n="contactoAyudaTitulo">Estamos para ayudarte</h2>
+            <p data-i18n="contactoAyudaTexto">¿Tienes dudas sobre nuestros servicios? Puedes enviarnos una consulta y revisar la información antes de agendar.</p>
+          </div>
+          <a class="contacto-btn contacto-btn--principal" href="/servicios" data-i18n="contactoAyudaBoton">Ver servicios</a>
+        </article>
+      </div>
+      <article class="contacto-bloque contacto-formulario">
+        <div class="contacto-bloque__cabecera">
+          <div class="contacto-bloque__icono" aria-hidden="true">✉</div>
+          <div><span class="contacto-eyebrow" data-i18n="contactoConsultaMini">Consulta</span>
+            <h2 data-i18n="contactoFormularioTitulo">Envíanos un mensaje</h2></div>
+        </div>
+        <p class="contacto-formulario__intro" data-i18n="contactoFormularioIntro">Completa los datos y cuéntanos qué necesitas. Los campos con * son obligatorios.</p>
+        <form class="formulario contacto-form" id="formContacto" method="post" th:action="@{/api/contacto}">
+          <div class="contacto-feedback" aria-live="polite" aria-atomic="true"></div>
+          <div class="contacto-campos-grid">
+            <div class="campo"><label for="nombre"><span data-i18n="labelNombre">Nombre</span> <strong aria-hidden="true">*</strong></label><input type="text" id="nombre" name="nombre" placeholder="Digite su nombre" data-i18n-placeholder="phNombre" maxlength="100" autocomplete="name" required></div>
+            <div class="campo"><label for="correo"><span data-i18n="labelCorreo">Correo electrónico</span> <strong aria-hidden="true">*</strong></label><input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" data-i18n-placeholder="phCorreo" maxlength="100" autocomplete="email" required></div>
+            <div class="campo"><label for="telefono" data-i18n="labelTelefono">Teléfono</label><input type="tel" id="telefono" name="telefono" placeholder="8888-8888" maxlength="20" autocomplete="tel"></div>
+            <div class="campo"><label for="motivo"><span data-i18n="contactoMotivo">Motivo de la consulta</span> <strong aria-hidden="true">*</strong></label>
+              <select id="motivo" name="motivo" required>
+                <option value="" data-i18n="contactoSeleccione">Seleccione una opción</option>
+                <option value="Consulta veterinaria" data-i18n="servicioConsultaTitulo">Consulta veterinaria</option>
+                <option value="Vacunación" data-i18n="servicioVacunacionTitulo">Vacunación</option>
+                <option value="Baño y cuidado" data-i18n="servicioBanoTitulo">Baño y cuidado</option>
+                <option value="Emergencia" data-i18n="servicioEmergenciasTitulo">Emergencia</option>
+                <option value="Otro" data-i18n="opOtro">Otro</option>
+              </select></div>
+            <div class="campo contacto-campo--mensaje"><label for="mensaje"><span data-i18n="contactoMensaje">Mensaje</span> <strong aria-hidden="true">*</strong></label><textarea id="mensaje" name="mensaje" rows="5" maxlength="5000" placeholder="Escriba aquí su consulta..." data-i18n-placeholder="phMensaje" required></textarea></div>
+          </div>
+          <div class="contacto-form__acciones">
+            <span data-i18n="contactoFormularioNota">La consulta se guarda en el sistema; no envía un correo automático.</span>
+            <button class="contacto-btn contacto-btn--principal" type="submit" data-i18n="contactoEnviar">Enviar consulta</button>
+          </div>
+        </form>
+      </article>
+    </section>
+    <p class="contacto-demo-nota" data-i18n="contactoNotaDemo">Datos de contacto de ejemplo para este proyecto académico. Confirma teléfono, correo, horarios y dirección antes de publicar.</p>
+  </div>
 </main>
 
 <footer>

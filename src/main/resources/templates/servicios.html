@@ -1,17 +1,21 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Veterinaria Huellitas: atención, prevención y bienestar para tus mascotas.">
-    <link rel="icon" href="/HuellitasIcono.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/estilos.css">
+    <link rel="icon" href="/HuellitasIcono.ico?v=20261113b" type="image/x-icon">
+    <link rel="stylesheet" href="/estilos.css?v=20261113-servicios">
+    <link rel="stylesheet" href="/servicios-modern.css?v=20261113-v2">
     <title>Servicios | Veterinaria Huellitas</title>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 
-<body>
+<body class="pagina-servicios">
 
 <div class="topbar">
     <div class="topbar-contenido">
@@ -30,7 +34,7 @@
 
         <a class="marca" href="/" aria-label="Ir al inicio">
                 <span class="marca-icono">
-                    <img src="/Huellitas.png" alt="Huellitas">
+                    <img src="/Huellitas.png?v=20261113b" alt="Huellitas">
                 </span>
 
             <span>
@@ -72,9 +76,8 @@
                 Contacto
             </a>
 
-            <a href="/login" class="boton-login">
-                Iniciar sesión
-            </a>
+            <a href="/login" class="boton-login" sec:authorize="isAnonymous()" data-i18n="menuLogin">Iniciar sesión</a>
+            <a href="/panel" class="boton-login" sec:authorize="isAuthenticated()" data-i18n="menuPanel">Mi panel</a>
 
             <div class="selector-idioma">
                 <select id="selectorIdioma">
@@ -92,214 +95,530 @@
 
     <div class="contenedor">
 
-        <section class="cabecera-pagina revelar">
-
-                <span class="mini"
-                      data-i18n="serviciosMini">
-                    Cuidado integral
-                </span>
-
-            <h1 data-i18n="serviciosTitulo">
-                Nuestros servicios
-            </h1>
-
-            <p data-i18n="serviciosIntro">
-                Selecciona una tarjeta para ver la imagen y una explicación
-                más completa del servicio.
-            </p>
-
+        <section class="cabecera-pagina hero-servicios-visual" aria-labelledby="serviciosTitulo">
+            <div class="hero-servicios-copy">
+                <span class="mini hero-etiqueta" data-i18n="serviciosMini">Cuidado integral</span>
+                <h1 id="serviciosTitulo" data-i18n="serviciosTitulo">Nuestros servicios</h1>
+                <p data-i18n="serviciosIntro">Servicios veterinarios para la salud, higiene y bienestar de tus mascotas.</p>
+            </div>
+            <img class="hero-servicios-mascotas" src="/mascotas-servicios.png"
+                 alt="Perro y gato representando el cuidado veterinario" loading="eager">
         </section>
 
-        <section class="seccion limpia revelar">
+        <!-- Barra de filtros interactivos -->
+        <div class="filtros-contenedor">
+            <div class="filtros-servicios">
+                <button class="filtro-btn activo"
+                        type="button"
+                        data-filtro="todos"
+                        aria-pressed="true"
+                        data-i18n="filtroTodos">
+                    Todos los servicios
+                </button>
+                <button class="filtro-btn"
+                        type="button"
+                        data-filtro="salud"
+                        aria-pressed="false"
+                        data-i18n="filtroSalud">
+                    Salud y Vacunas
+                </button>
+                <button class="filtro-btn"
+                        type="button"
+                        data-filtro="estetica"
+                        aria-pressed="false"
+                        data-i18n="filtroEstetica">
+                    Higiene y Estética
+                </button>
+                <button class="filtro-btn"
+                        type="button"
+                        data-filtro="urgencias"
+                        aria-pressed="false"
+                        data-i18n="filtroUrgencias">
+                    Emergencias
+                </button>
+            </div>
+        </div>
+
+        <p class="nota-precios" data-i18n="serviciosAvisoPrecios">Precios de ejemplo para este proyecto académico; pueden variar según el caso y deben confirmarse antes de publicar.</p>
+
+        <section class="seccion limpia servicios-contenido">
 
             <div class="servicios servicios-completos">
 
+                <!-- 1. Consulta Veterinaria -->
                 <article class="tarjeta servicio-click"
                          tabindex="0"
                          data-servicio="consulta"
+                         data-categoria="salud"
                          data-imagen="/consulta.png"
                          data-icono="/estetoscopio1.png">
 
-                    <img class="tarjeta-imagen"
-                         src="/consulta.png"
-                         alt="Consulta veterinaria"
-                         data-i18n-alt="servicioConsultaAlt">
+                    <div class="tarjeta-imagen-contenedor">
+                        <img class="tarjeta-imagen"
+                             src="/consulta.png"
+                             alt="Consulta veterinaria"
+                             data-i18n-alt="servicioConsultaAlt">
+                        <span class="tarjeta-etiqueta-categoria" data-i18n="catMedicina">
+                            Salud y vacunas
+                        </span>
+                    </div>
 
                     <div class="tarjeta-cuerpo">
 
                         <h3 data-i18n="servicioConsultaTitulo">
-                            🩺 Consulta veterinaria
+                            Consulta veterinaria
                         </h3>
 
-                        <p data-i18n="servicioConsultaCorto">
+                        <p class="servicio-descripcion" data-i18n="servicioConsultaCorto">
                             Revisión general de tu mascota.
                         </p>
 
-                        <button class="boton-ver"
-                                type="button"
-                                data-i18n="verDetalles">
-                            Ver detalles
-                        </button>
+                        <div class="tarjeta-precio-bloque">
+                            <div class="precio-encabezado">
+                                <span class="precio-label" data-i18n="precioDesde">Tarifa</span>
+                                <span class="precio-iva" data-i18n="precioIva">IVA incluido</span>
+                            </div>
+                            <div class="precio-monto" data-i18n="precioConsulta">₡15,000</div>
+                        </div>
+
+                        <ul class="tarjeta-caracteristicas">
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeConsulta1">Examen clínico integral</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeConsulta2">Control de peso y signos vitales</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeConsulta3">Guía preventiva y nutricional</span></li>
+                        </ul>
+
+                        <div class="tarjeta-acciones">
+                            <button class="boton-ver"
+                                    type="button"
+                                    data-i18n="verDetalles">
+                                Ver detalles
+                            </button>
+                            <a class="boton boton-agendar-tarjeta"
+                               href="/citas"
+                               onclick="event.stopPropagation()"
+                               data-i18n="botonAgendarDirecto">
+                                Agendar cita
+                            </a>
+                        </div>
 
                     </div>
 
                 </article>
 
+                <!-- 2. Vacunación -->
                 <article class="tarjeta servicio-click"
                          tabindex="0"
                          data-servicio="vacunacion"
+                         data-categoria="salud"
                          data-imagen="/vacunacion.png"
                          data-icono="/inyeccion1.png">
 
-                    <img class="tarjeta-imagen"
-                         src="/vacunacion.png"
-                         alt="Vacunación de mascota"
-                         data-i18n-alt="servicioVacunacionAlt">
+                    <div class="tarjeta-imagen-contenedor">
+                        <img class="tarjeta-imagen"
+                             src="/vacunacion.png"
+                             alt="Vacunación de mascota"
+                             data-i18n-alt="servicioVacunacionAlt">
+                        <span class="tarjeta-etiqueta-categoria" data-i18n="catVacunacion">
+                            Salud y vacunas
+                        </span>
+                    </div>
 
                     <div class="tarjeta-cuerpo">
 
                         <h3 data-i18n="servicioVacunacionTitulo">
-                            💉 Vacunación
+                            Vacunación
                         </h3>
 
-                        <p data-i18n="servicioVacunacionCorto">
+                        <p class="servicio-descripcion" data-i18n="servicioVacunacionCorto">
                             Aplicación y control de vacunas.
                         </p>
 
-                        <button class="boton-ver"
-                                type="button"
-                                data-i18n="verDetalles">
-                            Ver detalles
-                        </button>
+                        <div class="tarjeta-precio-bloque">
+                            <div class="precio-encabezado">
+                                <span class="precio-label" data-i18n="precioDesde">Tarifa</span>
+                                <span class="precio-iva" data-i18n="precioIva">IVA incluido</span>
+                            </div>
+                            <div class="precio-monto" data-i18n="precioVacunacion">₡18,000</div>
+                        </div>
+
+                        <ul class="tarjeta-caracteristicas">
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeVacuna1">Vacuna y cartilla oficial</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeVacuna2">Revisión física previa</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeVacuna3">Recordatorio del esquema</span></li>
+                        </ul>
+
+                        <div class="tarjeta-acciones">
+                            <button class="boton-ver"
+                                    type="button"
+                                    data-i18n="verDetalles">
+                                Ver detalles
+                            </button>
+                            <a class="boton boton-agendar-tarjeta"
+                               href="/citas"
+                               onclick="event.stopPropagation()"
+                               data-i18n="botonAgendarDirecto">
+                                Agendar cita
+                            </a>
+                        </div>
 
                     </div>
 
                 </article>
 
+                <!-- 3. Baño y Cuidado -->
                 <article class="tarjeta servicio-click"
                          tabindex="0"
                          data-servicio="bano"
+                         data-categoria="estetica"
                          data-imagen="/bano.png"
                          data-icono="/bano1.png">
 
-                    <img class="tarjeta-imagen"
-                         src="/bano.png"
-                         alt="Baño y cuidado de mascota"
-                         data-i18n-alt="servicioBanoAlt">
+                    <div class="tarjeta-imagen-contenedor">
+                        <img class="tarjeta-imagen"
+                             src="/bano.png"
+                             alt="Baño y cuidado de mascota"
+                             data-i18n-alt="servicioBanoAlt">
+                        <span class="tarjeta-etiqueta-categoria" data-i18n="catHigiene">
+                            Higiene & Bienestar
+                        </span>
+                    </div>
 
                     <div class="tarjeta-cuerpo">
 
                         <h3 data-i18n="servicioBanoTitulo">
-                            🛁 Baño y cuidado
+                            Baño y cuidado
                         </h3>
 
-                        <p data-i18n="servicioBanoCorto">
+                        <p class="servicio-descripcion" data-i18n="servicioBanoCorto">
                             Higiene para perros y gatos.
                         </p>
 
-                        <button class="boton-ver"
-                                type="button"
-                                data-i18n="verDetalles">
-                            Ver detalles
-                        </button>
+                        <div class="tarjeta-precio-bloque">
+                            <div class="precio-encabezado">
+                                <span class="precio-label" data-i18n="precioDesde">Tarifa</span>
+                                <span class="precio-iva" data-i18n="precioIva">IVA incluido</span>
+                            </div>
+                            <div class="precio-monto" data-i18n="precioBano">₡14,000</div>
+                        </div>
+
+                        <ul class="tarjeta-caracteristicas">
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeBano1">Shampoo hipoalergénico medicado</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeBano2">Secado, corte de uñas y oídos</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeBano3">Cepillado y deslanado suave</span></li>
+                        </ul>
+
+                        <div class="tarjeta-acciones">
+                            <button class="boton-ver"
+                                    type="button"
+                                    data-i18n="verDetalles">
+                                Ver detalles
+                            </button>
+                            <a class="boton boton-agendar-tarjeta"
+                               href="/citas"
+                               onclick="event.stopPropagation()"
+                               data-i18n="botonAgendarDirecto">
+                                Agendar cita
+                            </a>
+                        </div>
 
                     </div>
 
                 </article>
 
+                <!-- 4. Peluquería -->
                 <article class="tarjeta servicio-click"
                          tabindex="0"
                          data-servicio="peluqueria"
+                         data-categoria="estetica"
                          data-imagen="/peluqueria.png"
                          data-icono="/peluqueria1.png">
 
-                    <img class="tarjeta-imagen"
-                         src="/peluqueria.png"
-                         alt="Peluquería para mascotas"
-                         data-i18n-alt="servicioPeluqueriaAlt">
+                    <div class="tarjeta-imagen-contenedor">
+                        <img class="tarjeta-imagen"
+                             src="/peluqueria.png"
+                             alt="Peluquería para mascotas"
+                             data-i18n-alt="servicioPeluqueriaAlt">
+                        <span class="tarjeta-etiqueta-categoria" data-i18n="catHigiene">
+                            Higiene & Estética
+                        </span>
+                    </div>
 
                     <div class="tarjeta-cuerpo">
 
                         <h3 data-i18n="servicioPeluqueriaTitulo">
-                            ✂️ Peluquería
+                            Peluquería
                         </h3>
 
-                        <p data-i18n="servicioPeluqueriaCorto">
+                        <p class="servicio-descripcion" data-i18n="servicioPeluqueriaCorto">
                             Corte y cuidado estético.
                         </p>
 
-                        <button class="boton-ver"
-                                type="button"
-                                data-i18n="verDetalles">
-                            Ver detalles
-                        </button>
+                        <div class="tarjeta-precio-bloque">
+                            <div class="precio-encabezado">
+                                <span class="precio-label" data-i18n="precioDesde">Tarifa</span>
+                                <span class="precio-iva" data-i18n="precioIva">IVA incluido</span>
+                            </div>
+                            <div class="precio-monto" data-i18n="precioPeluqueria">₡16,000</div>
+                        </div>
+
+                        <ul class="tarjeta-caracteristicas">
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyePeluqueria1">Corte de raza o personalizado</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyePeluqueria2">Baño completo previo</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyePeluqueria3">Perfilado a tijera y fragancia</span></li>
+                        </ul>
+
+                        <div class="tarjeta-acciones">
+                            <button class="boton-ver"
+                                    type="button"
+                                    data-i18n="verDetalles">
+                                Ver detalles
+                            </button>
+                            <a class="boton boton-agendar-tarjeta"
+                               href="/citas"
+                               onclick="event.stopPropagation()"
+                               data-i18n="botonAgendarDirecto">
+                                Agendar cita
+                            </a>
+                        </div>
 
                     </div>
 
                 </article>
 
+                <!-- 5. Limpieza Dental -->
                 <article class="tarjeta servicio-click"
                          tabindex="0"
                          data-servicio="dental"
+                         data-categoria="salud"
                          data-imagen="/dental.png"
                          data-icono="/diente1.png">
 
-                    <img class="tarjeta-imagen"
-                         src="/dental.png"
-                         alt="Cuidado dental veterinario"
-                         data-i18n-alt="servicioDentalAlt">
+                    <div class="tarjeta-imagen-contenedor">
+                        <img class="tarjeta-imagen"
+                             src="/dental.png"
+                             alt="Cuidado dental veterinario"
+                             data-i18n-alt="servicioDentalAlt">
+                        <span class="tarjeta-etiqueta-categoria" data-i18n="catDental">
+                            Cuidado Bucodental
+                        </span>
+                    </div>
 
                     <div class="tarjeta-cuerpo">
 
                         <h3 data-i18n="servicioDentalTitulo">
-                            🦷 Limpieza dental
+                            Limpieza dental
                         </h3>
 
-                        <p data-i18n="servicioDentalCorto">
+                        <p class="servicio-descripcion" data-i18n="servicioDentalCorto">
                             Cuidado de dientes y encías.
                         </p>
 
-                        <button class="boton-ver"
-                                type="button"
-                                data-i18n="verDetalles">
-                            Ver detalles
-                        </button>
+                        <div class="tarjeta-precio-bloque">
+                            <div class="precio-encabezado">
+                                <span class="precio-label" data-i18n="precioDesde">Tarifa</span>
+                                <span class="precio-iva" data-i18n="precioIva">IVA incluido</span>
+                            </div>
+                            <div class="precio-monto" data-i18n="precioDental">₡32,000</div>
+                        </div>
+
+                        <ul class="tarjeta-caracteristicas">
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeDental1">Profilaxis dental con ultrasonido</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeDental2">Pulido y remoción de sarro</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeDental3">Evaluación de encías</span></li>
+                        </ul>
+
+                        <div class="tarjeta-acciones">
+                            <button class="boton-ver"
+                                    type="button"
+                                    data-i18n="verDetalles">
+                                Ver detalles
+                            </button>
+                            <a class="boton boton-agendar-tarjeta"
+                               href="/citas"
+                               onclick="event.stopPropagation()"
+                               data-i18n="botonAgendarDirecto">
+                                Agendar cita
+                            </a>
+                        </div>
 
                     </div>
 
                 </article>
 
+                <!-- 6. Emergencias -->
                 <article class="tarjeta servicio-click"
                          tabindex="0"
                          data-servicio="emergencias"
+                         data-categoria="urgencias"
                          data-imagen="/emergencias.png"
                          data-icono="/emergencia1.png">
 
-                    <img class="tarjeta-imagen"
-                         src="/emergencias.png"
-                         alt="Atención veterinaria de emergencia"
-                         data-i18n-alt="servicioEmergenciasAlt">
+                    <div class="tarjeta-imagen-contenedor">
+                        <img class="tarjeta-imagen"
+                             src="/emergencias.png"
+                             alt="Atención veterinaria de emergencia"
+                             data-i18n-alt="servicioEmergenciasAlt">
+                        <span class="tarjeta-etiqueta-categoria etiqueta-urgencia" data-i18n="catUrgencias">
+                            Atención urgente
+                        </span>
+                    </div>
 
                     <div class="tarjeta-cuerpo">
 
                         <h3 data-i18n="servicioEmergenciasTitulo">
-                            🚑 Emergencias
+                            Emergencias
                         </h3>
 
-                        <p data-i18n="servicioEmergenciasCorto">
+                        <p class="servicio-descripcion" data-i18n="servicioEmergenciasCorto">
                             Atención para situaciones urgentes.
                         </p>
 
-                        <button class="boton-ver"
-                                type="button"
-                                data-i18n="verDetalles">
-                            Ver detalles
-                        </button>
+                        <div class="tarjeta-precio-bloque precio-bloque-urgencia">
+                            <div class="precio-encabezado">
+                                <span class="precio-label" data-i18n="precioDesde">Tarifa</span>
+                                <span class="precio-iva" data-i18n="precioIva">IVA incluido</span>
+                            </div>
+                            <div class="precio-monto" data-i18n="precioEmergencias">Desde ₡25,000</div>
+                        </div>
+
+                        <ul class="tarjeta-caracteristicas">
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeEmergencia1">Triage y atención prioritaria</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeEmergencia2">Estabilización de signos vitales</span></li>
+                            <li><span class="punto-verde">✓</span> <span data-i18n="incluyeEmergencia3">Equipo y monitoreo continuo</span></li>
+                        </ul>
+
+                        <div class="tarjeta-acciones">
+                            <button class="boton-ver"
+                                    type="button"
+                                    data-i18n="verDetalles">
+                                Ver detalles
+                            </button>
+                            <a class="boton boton-agendar-tarjeta"
+                               href="/citas"
+                               onclick="event.stopPropagation()"
+                               data-i18n="botonAgendarDirecto">
+                                Agendar cita
+                            </a>
+                        </div>
 
                     </div>
 
                 </article>
 
+            </div>
+
+        </section>
+
+        <!-- Sección de Tarifario Adicional y Garantías -->
+        <section class="seccion-adicionales">
+
+            <div class="titulo-seccion">
+                <span class="mini badge-destacado" data-i18n="tarifarioMini">
+                    Tarifas transparentes
+                </span>
+                <h2 data-i18n="tablaPreciosTitulo">
+                    Tarifario y Servicios Adicionales
+                </h2>
+                <p data-i18n="tablaPreciosSubtitulo">
+                    Conoce nuestras tarifas transparentes para el cuidado integral de tus mascotas en Pérez Zeledón.
+                </p>
+            </div>
+
+            <div class="grilla-tarifas-adicionales">
+
+                <div class="tarifa-card">
+                    <div class="tarifa-info">
+                        <span class="tarifa-icono">💊</span>
+                        <div>
+                            <strong data-i18n="adicionalDesparasitacion">Desparasitación preventiva</strong>
+                            <small data-i18n="adicionalDesparasitacionDesc">Interna y externa según peso</small>
+                        </div>
+                    </div>
+                    <span class="tarifa-precio">₡6,000</span>
+                </div>
+
+                <div class="tarifa-card">
+                    <div class="tarifa-info">
+                        <span class="tarifa-icono">🐾</span>
+                        <div>
+                            <strong data-i18n="adicionalUnas">Corte de uñas clínico</strong>
+                            <small data-i18n="adicionalUnasDesc">Corte seguro y limado suave</small>
+                        </div>
+                    </div>
+                    <span class="tarifa-precio">₡3,500</span>
+                </div>
+
+                <div class="tarifa-card">
+                    <div class="tarifa-info">
+                        <span class="tarifa-icono">👂</span>
+                        <div>
+                            <strong data-i18n="adicionalOidos">Limpieza profunda de oídos</strong>
+                            <small data-i18n="adicionalOidosDesc">Antiséptica y preventiva</small>
+                        </div>
+                    </div>
+                    <span class="tarifa-precio">₡4,500</span>
+                </div>
+
+                <div class="tarifa-card">
+                    <div class="tarifa-info">
+                        <span class="tarifa-icono">✈️</span>
+                        <div>
+                            <strong data-i18n="adicionalCertificado">Certificado de viaje</strong>
+                            <small data-i18n="adicionalCertificadoDesc">Requisitos según destino y normativa</small>
+                        </div>
+                    </div>
+                    <span class="tarifa-precio">₡12,000</span>
+                </div>
+
+                <div class="tarifa-card">
+                    <div class="tarifa-info">
+                        <span class="tarifa-icono">🏷️</span>
+                        <div>
+                            <strong data-i18n="adicionalMicrochip">Colocación de microchip</strong>
+                            <small data-i18n="adicionalMicrochipDesc">Identificación y registro</small>
+                        </div>
+                    </div>
+                    <span class="tarifa-precio">₡20,000</span>
+                </div>
+
+                <div class="tarifa-card">
+                    <div class="tarifa-info">
+                        <span class="tarifa-icono">🩹</span>
+                        <div>
+                            <strong data-i18n="adicionalCuraciones">Curación y sutura menor</strong>
+                            <small data-i18n="adicionalCuracionesDesc">Heridas y vendaje estéril</small>
+                        </div>
+                    </div>
+                    <span class="tarifa-precio">₡18,000</span>
+                </div>
+
+            </div>
+
+            <p class="tarifas-aclaracion" data-i18n="serviciosAvisoPrecios">Precios de ejemplo para este proyecto académico; pueden variar según el caso y deben confirmarse antes de publicar.</p>
+
+            <!-- Información general -->
+            <div class="bloque-garantias">
+                <div class="garantia-item">
+                    <span class="garantia-icono">🩺</span>
+                    <div>
+                        <strong data-i18n="garantiaMedicos">Equipo veterinario</strong>
+                        <p data-i18n="garantiaMedicosDesc">Consulta al personal sobre su formación y acreditación.</p>
+                    </div>
+                </div>
+                <div class="garantia-item">
+                    <span class="garantia-icono">💳</span>
+                    <div>
+                        <strong data-i18n="garantiaPagos">Medios de pago</strong>
+                        <p data-i18n="garantiaPagosDesc">Consulta los medios de pago disponibles antes de tu visita.</p>
+                    </div>
+                </div>
+                <div class="garantia-item">
+                    <span class="garantia-icono">💖</span>
+                    <div>
+                        <strong data-i18n="garantiaAmor">Atención con Cariño</strong>
+                        <p data-i18n="garantiaAmorDesc">Buscamos que cada mascota reciba un trato tranquilo y cercano.</p>
+                    </div>
+                </div>
             </div>
 
         </section>
@@ -324,15 +643,17 @@
             ×
         </button>
 
-        <img id="modalImagen"
-             class="modal-imagen"
-             src=""
-             alt="Imagen del servicio">
+        <div class="modal-imagen-contenedor">
+            <img id="modalImagen"
+                 class="modal-imagen"
+                 src=""
+                 alt="Imagen del servicio">
+        </div>
 
-        <span class="mini"
+        <span class="mini badge-destacado"
               data-i18n="modalInfoServicio">
-                Información del servicio
-            </span>
+            Información del servicio
+        </span>
 
         <div class="modal-titulo-servicio">
 
@@ -347,15 +668,51 @@
 
         </div>
 
+        <!-- Bloque de precio y duración en el modal -->
+        <div class="modal-precio-bloque">
+            <div class="modal-precio-item">
+                <span class="modal-etiqueta-pequena" data-i18n="modalTarifaEstimada">
+                    Tarifa de referencia:
+                </span>
+                <strong id="modalPrecio" class="modal-precio-cifra">
+                    ₡15,000
+                </strong>
+            </div>
+            <div class="modal-precio-item">
+                <span class="modal-etiqueta-pequena" data-i18n="modalDuracionEstimada">
+                    Duración estimada:
+                </span>
+                <strong id="modalDuracion" class="modal-duracion-cifra">
+                    ⏱ 30 – 45 min
+                </strong>
+            </div>
+        </div>
+
         <p id="modalTexto">
             Información del servicio.
         </p>
 
-        <a class="boton boton-principal"
-           href="/contacto"
-           data-i18n="modalSolicitarCita">
-            Solicitar cita
-        </a>
+        <!-- Lista de inclusiones detalladas -->
+        <div class="modal-detalles-adicionales">
+            <h4 data-i18n="modalQueIncluye">¿Qué incluye este servicio?</h4>
+            <ul id="modalIncluye" class="modal-lista-incluye">
+                <!-- Se llena dinámicamente con JavaScript -->
+            </ul>
+        </div>
+
+        <div class="modal-botones-accion">
+            <a class="boton boton-principal"
+               href="/citas"
+               data-i18n="modalSolicitarCita">
+                Solicitar cita
+            </a>
+            <a class="boton boton-whatsapp-modal"
+               href="https://wa.me/50688888888"
+               target="_blank"
+               data-i18n="modalConsultarWhatsapp">
+                💬 Consultar por WhatsApp
+            </a>
+        </div>
 
     </div>
 
@@ -443,7 +800,7 @@
     ↑
 </button>
 
-<script src="/js/script.js"></script>
+<script src="/js/script.js?v=20261113-servicios-v2"></script>
 
 </body>
 </html>
