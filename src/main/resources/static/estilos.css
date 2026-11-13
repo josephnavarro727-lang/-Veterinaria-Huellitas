@@ -2,18 +2,32 @@
    VARIABLES Y CONFIGURACIÓN GENERAL
 ========================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+
 :root {
-    --principal: #2e7d5b;
-    --principal-oscuro: #174d37;
-    --principal-claro: #e7f5ed;
-    --acento: #73c99c;
-    --texto: #24342d;
-    --texto-suave: #66736d;
-    --fondo: #f5f8f6;
+    --principal: #0d8a56;
+    --principal-oscuro: #095937;
+    --principal-profundo: #053b24;
+    --principal-claro: #eaf6ef;
+    --principal-suave: #d4edd9;
+    --acento: #10b981;
+    --acento-hover: #059669;
+    --texto: #172a22;
+    --texto-suave: #4c6357;
+    --texto-apagado: #7e9488;
+    --fondo: #f6faf7;
+    --fondo-tarjeta: #ffffff;
     --blanco: #ffffff;
-    --borde: #dce8e1;
-    --sombra: 0 12px 35px rgba(19, 67, 46, 0.10);
+    --borde: #dcece2;
+    --borde-fuerte: #b7dbc7;
+    --sombra-sm: 0 2px 8px rgba(9, 89, 55, 0.05);
+    --sombra: 0 12px 32px -4px rgba(9, 89, 55, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    --sombra-hover: 0 20px 35px -8px rgba(9, 89, 55, 0.16), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+    --radio-sm: 10px;
     --radio: 18px;
+    --radio-lg: 24px;
+    --fuente: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --fuente-titulo: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -27,10 +41,15 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--fuente);
     background: var(--fondo);
     color: var(--texto);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .marca strong {
+    font-family: var(--fuente-titulo);
 }
 
 a {
@@ -47,9 +66,11 @@ img {
 ========================================= */
 
 .topbar {
-    background: #123d2c;
-    color: #dff8e9;
+    background: #092e20;
+    color: #e0f8ec;
     font-size: 13px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .topbar-contenido {
@@ -452,47 +473,332 @@ main {
    TARJETAS Y SERVICIOS
 ========================================= */
 
+.badge-destacado {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #e6f6ee;
+    color: #0b6b43;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    border: 1px solid #bce6cd;
+}
+
+/* Filtros interactivos */
+.filtros-contenedor {
+    margin: 10px 0 28px;
+    display: flex;
+    justify-content: center;
+}
+
+.filtros-servicios {
+    display: inline-flex;
+    gap: 6px;
+    padding: 6px;
+    background: #ffffff;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    box-shadow: var(--sombra-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filtro-btn {
+    padding: 9px 20px;
+    border-radius: 999px;
+    border: 0;
+    background: transparent;
+    color: var(--texto-suave);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.filtro-btn:hover {
+    color: var(--principal-oscuro);
+    background: #eef7f2;
+}
+
+.filtro-btn.activo {
+    background: var(--principal);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(13, 138, 86, 0.28);
+}
+
 .servicios {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 26px;
 }
 
 .tarjeta {
     overflow: hidden;
-
     border: 1px solid var(--borde);
-    border-radius: 15px;
-
-    background: white;
-
-    transition: 0.25s ease;
+    border-radius: 20px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 16px rgba(9, 89, 55, 0.04);
 }
 
 .tarjeta:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--sombra);
-    border-color: #b7d5c4;
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-hover);
+    border-color: #a7d7bc;
 }
 
-.tarjeta-icono {
-    padding: 28px;
+.tarjeta-imagen-contenedor {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    background: #f0f7f2;
+}
+
+.tarjeta-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tarjeta:hover .tarjeta-imagen {
+    transform: scale(1.06);
+}
+
+.tarjeta-etiqueta-categoria {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(6px);
+    color: #0b6b43;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(220, 236, 226, 0.85);
+}
+
+.etiqueta-urgencia {
+    background: rgba(254, 242, 242, 0.95);
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.tarjeta-cuerpo {
+    padding: 22px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.tarjeta-cuerpo h3 {
+    color: #0b4a2f;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.servicio-descripcion {
+    color: var(--texto-suave);
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    min-height: 40px;
+}
+
+/* Bloque de precios en tarjeta */
+.tarjeta-precio-bloque {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border: 1px solid #bbf7d0;
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.precio-bloque-urgencia {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+    border-color: #fecdd3;
+}
+
+.precio-encabezado {
+    display: flex;
+    flex-direction: column;
+}
+
+.precio-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #166534;
+}
+
+.precio-bloque-urgencia .precio-label {
+    color: #9f1239;
+}
+
+.precio-iva {
+    font-size: 10.5px;
+    color: #3b7e56;
+    font-weight: 500;
+}
+
+.precio-bloque-urgencia .precio-iva {
+    color: #be123c;
+}
+
+.precio-monto {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #15803d;
+    font-family: var(--fuente-titulo);
+    letter-spacing: -0.5px;
+}
+
+.precio-bloque-urgencia .precio-monto {
+    color: #e11d48;
+}
+
+.tarjeta-caracteristicas {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #2c4438;
+}
+
+.tarjeta-caracteristicas li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.punto-verde {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #15803d;
+    display: inline-grid;
+    place-items: center;
+    font-size: 10.5px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.tarjeta-acciones {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.servicio-click {
+    cursor: pointer;
+}
+
+.boton-ver {
+    flex: 1;
+    margin-top: 0;
+    padding: 10px 14px;
+    border: 1px solid #c2e2d0;
+    border-radius: 10px;
+    background: #eaf6ef;
+    color: #0c5737;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
     text-align: center;
-    background: linear-gradient(180deg, white, #f8fbf9);
+}
+
+.boton-ver:hover {
+    background: #d8ece0;
+    border-color: #9fd4b6;
+    color: #064027;
+}
+
+.boton-agendar-tarjeta {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--principal);
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13.5px;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(13, 138, 86, 0.22);
+}
+
+.boton-agendar-tarjeta:hover {
+    background: var(--principal-oscuro);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(13, 138, 86, 0.32);
+}
+
+/* Tarjeta icono en index */
+.tarjeta-icono {
+    padding: 28px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbf9 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tarjeta-icono h3 {
+    margin-top: 12px;
+}
+
+.tarjeta-precio-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #eaf7ef;
+    border: 1px solid #bce6cd;
+    color: #0d8a56;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.tarjeta-precio-chip strong {
+    font-weight: 800;
+    color: #095937;
+    font-family: var(--fuente-titulo);
 }
 
 .icono-grande {
     display: inline-grid;
     place-items: center;
-
     width: 66px;
     height: 66px;
-
     margin-bottom: 16px;
-
     border-radius: 18px;
     background: var(--principal-claro);
-
     font-size: 30px;
 }
 
@@ -505,33 +811,118 @@ main {
     color: var(--texto-suave);
 }
 
-.tarjeta-imagen {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
+/* Sección de Tarifario Adicional y Garantías */
+.seccion-adicionales {
+    margin-top: 55px;
+    padding: 42px 34px;
+    background: #ffffff;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra);
 }
 
-.tarjeta-cuerpo {
-    padding: 22px;
-    text-align: center;
+.grilla-tarifas-adicionales {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0 38px;
 }
 
-.servicio-click {
-    cursor: pointer;
+.tarifa-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    background: #f8faf8;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.boton-ver {
-    margin-top: 14px;
-    padding: 9px 15px;
+.tarifa-card:hover {
+    transform: translateY(-3px);
+    border-color: #a7d7bc;
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(13, 138, 86, 0.08);
+}
 
-    border: 0;
-    border-radius: 8px;
+.tarifa-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-    background: var(--principal-claro);
-    color: var(--principal-oscuro);
+.tarifa-icono {
+    font-size: 22px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    background: #eef7f2;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
 
+.tarifa-info strong {
+    display: block;
+    font-size: 13.5px;
+    color: var(--texto);
+    font-weight: 700;
+}
+
+.tarifa-info small {
+    display: block;
+    font-size: 11.5px;
+    color: var(--texto-suave);
+}
+
+.tarifa-precio {
+    font-family: var(--fuente-titulo);
     font-weight: 800;
-    cursor: pointer;
+    font-size: 1.15rem;
+    color: #0d8a56;
+    padding-left: 10px;
+    white-space: nowrap;
+}
+
+.bloque-garantias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    padding-top: 32px;
+    border-top: 1px solid var(--borde);
+}
+
+.garantia-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.garantia-icono {
+    font-size: 26px;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #e6f6ee 0%, #d5edd9 100%);
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+
+.garantia-item strong {
+    display: block;
+    font-size: 15px;
+    color: var(--principal-oscuro);
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.garantia-item p {
+    font-size: 12.5px;
+    color: var(--texto-suave);
+    line-height: 1.45;
+    margin: 0;
 }
 
 
@@ -838,21 +1229,20 @@ legend {
    MODAL
 ========================================= */
 
+/* =========================================
+   MODAL DE SERVICIOS
+========================================= */
+
 .modal {
     display: none;
-
     position: fixed;
     inset: 0;
-
     z-index: 3000;
-
     align-items: center;
     justify-content: center;
-
     padding: 20px;
-
-    background: rgba(5, 25, 17, .72);
-    backdrop-filter: blur(5px);
+    background: rgba(6, 26, 17, 0.78);
+    backdrop-filter: blur(8px);
 }
 
 .modal.mostrar {
@@ -860,66 +1250,175 @@ legend {
 }
 
 .modal-contenido {
-    width: min(560px, 94%);
-    max-height: 92vh;
+    width: min(580px, 94%);
+    max-height: 90vh;
     overflow-y: auto;
-
     position: relative;
-
-    padding: 25px;
-
+    padding: 28px 24px 26px;
     text-align: center;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: aparecerModal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    background: white;
-    border-radius: 18px;
-
-    box-shadow: 0 25px 70px rgba(0,0,0,.30);
-
-    animation: aparecerModal .25s ease;
+.modal-imagen-contenedor {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: #eef7f2;
+    max-height: 240px;
 }
 
 .modal-imagen {
     width: 100%;
-    height: 260px;
-
+    height: 240px;
     object-fit: cover;
-
-    margin-bottom: 20px;
-
-    border-radius: 13px;
+    display: block;
+    border-radius: 14px;
 }
 
 .modal-contenido h2 {
     margin: 7px 0 10px;
     color: var(--principal-oscuro);
+    font-size: 1.5rem;
 }
 
 .modal-contenido p {
     color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: 12px;
+}
+
+.modal-precio-bloque {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.modal-precio-item {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border: 1px solid #bbf7d0;
+    border-radius: 14px;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+.modal-etiqueta-pequena {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #166534;
+    margin-bottom: 2px;
+}
+
+.modal-precio-cifra {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #15803d;
+    font-family: var(--fuente-titulo);
+}
+
+.modal-duracion-cifra {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f766e;
+}
+
+.modal-detalles-adicionales {
+    text-align: left;
+    background: #f8faf8;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin: 16px 0 20px;
+}
+
+.modal-detalles-adicionales h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0b4a2f;
+    margin-bottom: 10px;
+}
+
+.modal-lista-incluye {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #2c4438;
+}
+
+.modal-lista-incluye li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-botones-accion {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.modal-botones-accion .boton {
+    flex: 1;
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    text-decoration: none;
+    border-radius: 12px;
+}
+
+.boton-whatsapp-modal {
+    background: #25d366;
+    color: #ffffff !important;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+    transition: all 0.2s ease;
+}
+
+.boton-whatsapp-modal:hover {
+    background: #1eb857;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
 }
 
 .cerrar-modal {
     position: absolute;
-    top: 10px;
-    right: 10px;
-
+    top: 12px;
+    right: 12px;
+    z-index: 10;
     width: 38px;
     height: 38px;
-
     display: grid;
     place-items: center;
-
     border: 0;
     border-radius: 50%;
-
-    background: white;
-    color: #324b40;
-
-    font-size: 27px;
-
+    background: #ffffff;
+    color: #263e33;
+    font-size: 26px;
     cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
 
-    box-shadow: 0 3px 12px rgba(0,0,0,.16);
+.cerrar-modal:hover {
+    transform: rotate(90deg);
+    background: #f0f7f2;
+    color: #0b4a2f;
 }
 
 .sin-scroll {
@@ -929,9 +1428,8 @@ legend {
 @keyframes aparecerModal {
     from {
         opacity: 0;
-        transform: translateY(10px) scale(.97);
+        transform: translateY(12px) scale(.96);
     }
-
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -1091,6 +1589,14 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .grilla-tarifas-adicionales {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bloque-garantias {
+        grid-template-columns: 1fr;
+    }
+
     .contacto-grid {
         grid-template-columns: 1fr;
     }
@@ -1168,8 +1674,27 @@ footer {
     .servicios,
     .contacto-tarjetas,
     .testimonios,
-    .form-grid {
+    .form-grid,
+    .grilla-tarifas-adicionales {
         grid-template-columns: 1fr;
+    }
+
+    .modal-precio-bloque {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-botones-accion,
+    .tarjeta-acciones {
+        flex-direction: column;
+    }
+
+    .tarjeta-acciones .boton-ver,
+    .tarjeta-acciones .boton-agendar-tarjeta {
+        width: 100%;
+    }
+
+    .seccion-adicionales {
+        padding: 24px 18px;
     }
 
     .cta {
@@ -1440,17 +1965,28 @@ footer {
     letter-spacing: 0.3px;
 }
 .boton-login {
-    display: inline-block;
-    background-color: #167347;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d8a56 0%, #10b981 100%);
     color: white !important;
-    padding: 11px 20px;
-    border-radius: 9px;
+    padding: 10px 20px;
+    border-radius: 999px;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: 700;
+    font-size: 13.5px;
+    box-shadow: 0 4px 14px rgba(13, 138, 86, 0.25);
+    transition: all 0.25s ease;
 }
 
 .boton-login:hover {
-    background-color: #105737;
+    background: linear-gradient(135deg, #095937 0%, #059669 100%);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(13, 138, 86, 0.35);
 }
+
+/* IDENTIDAD HUELLITAS 2026 - logo nuevo en todas las páginas públicas */
+.marca-icono { width: 52px; height: 52px; border: 0; border-radius: 15px; background: transparent; overflow: visible; box-shadow: 0 4px 12px rgba(11,76,51,.12); }
+.marca-icono img { display: block; width: 100%; height: 100%; padding: 0; object-fit: contain; border-radius: 15px; }
+@media(max-width:650px){ .marca-icono { width: 44px; height:44px; } }

@@ -5,6 +5,7 @@ import com.huellitas.veterinaria.repository.ServicioRepository;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +27,18 @@ public class ServicioApiController {
         List<Map<String, Object>> servicios =
                 servicioRepository.findByActivoTrue()
                         .stream()
-                        .map(servicio -> Map.<String, Object>of(
-                                "id_servicio", servicio.getIdServicio(),
-                                "nombre", servicio.getNombre()
-                        ))
+                        .map(servicio -> {
+                            Map<String, Object> map = new LinkedHashMap<>();
+                            map.put("id_servicio", servicio.getIdServicio());
+                            map.put("nombre", servicio.getNombre());
+                            if (servicio.getPrecio() != null) {
+                                map.put("precio", servicio.getPrecio());
+                            }
+                            if (servicio.getDescripcion() != null) {
+                                map.put("descripcion", servicio.getDescripcion());
+                            }
+                            return map;
+                        })
                         .toList();
 
         return Map.of(

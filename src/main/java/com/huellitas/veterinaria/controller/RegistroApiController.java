@@ -4,100 +4,73 @@ import com.huellitas.veterinaria.entity.Mascota;
 import com.huellitas.veterinaria.entity.Propietario;
 import com.huellitas.veterinaria.repository.MascotaRepository;
 import com.huellitas.veterinaria.repository.PropietarioRepository;
-
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class RegistroApiController {
+    private final PropietarioRepository propietarios;
+    private final MascotaRepository mascotas;
 
-    private final PropietarioRepository propietarioRepository;
-    private final MascotaRepository mascotaRepository;
-
-    public RegistroApiController(
-            PropietarioRepository propietarioRepository,
-            MascotaRepository mascotaRepository) {
-
-        this.propietarioRepository = propietarioRepository;
-        this.mascotaRepository = mascotaRepository;
+    public RegistroApiController(PropietarioRepository propietarios, MascotaRepository mascotas) {
+        this.propietarios = propietarios;
+        this.mascotas = mascotas;
     }
 
     @PostMapping("/registrar")
     @Transactional
-    public ResponseEntity<?> registrar(
-            @RequestBody RegistroRequest datos) {
-
-        if (datos.propietario() == null || datos.mascota() == null) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("mensaje", "Faltan datos del registro."));
+    public ResponseEntity<?> registrar(@Valid @RequestBody RegistroRequest datos, Authentication usuario) {
+        var dueno = datos.propietario();
+        var animal = datos.mascota();
+        var existente = propietarios.findByCedula(dueno.cedula().trim());
+        boolean personal = usuario != null && usuario.isAuthenticated() && usuario.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN") || a.getAuthority().equals("ROLE_RECEPCIONISTA"));
+        if (existente.isPresent() && !personal) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "No se pudo completar el registro. Si ya estás registrado, contacta con Recepción para agregar una mascota.");
         }
-
-        var propietarioDatos = datos.propietario();
-        var mascotaDatos = datos.mascota();
-
-        if (vacio(propietarioDatos.nombre())
-                || vacio(propietarioDatos.cedula())
-                || vacio(mascotaDatos.nombre())
-                || vacio(mascotaDatos.tipo())) {
-
-            return ResponseEntity.badRequest()
-                    .body(Map.of("mensaje", "Complete los campos obligatorios."));
-        }
-
-        Propietario propietario = propietarioRepository
-                .findByCedula(propietarioDatos.cedula().trim())
-                .orElseGet(Propietario::new);
-
-        propietario.setNombre(propietarioDatos.nombre().trim());
-        propietario.setCedula(propietarioDatos.cedula().trim());
-        propietario.setTelefono(propietarioDatos.telefono());
-        propietario.setCorreo(propietarioDatos.correo());
-
-        propietario = propietarioRepository.save(propietario);
-
+        // El registro de otra mascota nunca reemplaza datos de un propietario existente.
+        Propietario propietario = existente.orElseGet(() -> {
+            Propietario nuevo = new Propietario();
+            nuevo.setNombre(dueno.nombre().trim());
+            nuevo.setCedula(dueno.cedula().trim());
+            nuevo.setTelefono(opcional(dueno.telefono()));
+            nuevo.setCorreo(opcional(dueno.correo()));
+            return propietarios.save(nuevo);
+        });
         Mascota mascota = new Mascota();
-
-        mascota.setNombre(mascotaDatos.nombre().trim());
-        mascota.setTipo(mascotaDatos.tipo().trim());
-        mascota.setRaza(mascotaDatos.raza());
-        mascota.setEdad(mascotaDatos.edad());
-        mascota.setObservaciones(mascotaDatos.observaciones());
+        mascota.setNombre(animal.nombre().trim());
+        mascota.setTipo(animal.tipo().trim());
+        mascota.setRaza(opcional(animal.raza()));
+        mascota.setEdad(animal.edad());
+        mascota.setObservaciones(opcional(animal.observaciones()));
         mascota.setIdPropietario(propietario.getIdPropietario());
-
-        mascota = mascotaRepository.save(mascota);
-
-        return ResponseEntity.ok(Map.of(
-                "mensaje", "Mascota registrada correctamente.",
-                "idMascota", mascota.getIdMascota(),
-                "idPropietario", propietario.getIdPropietario()
-        ));
+        mascota = mascotas.save(mascota);
+        return ResponseEntity.ok(Map.of("mensaje", "Mascota registrada correctamente.",
+                "idMascota", mascota.getIdMascota(), "idPropietario", propietario.getIdPropietario()));
     }
 
-    private boolean vacio(String texto) {
-        return texto == null || texto.isBlank();
-    }
+    private String opcional(String valor) { return valor == null || valor.isBlank() ? null : valor.trim(); }
 
-    public record RegistroRequest(
-            PropietarioDatos propietario,
-            MascotaDatos mascota
-    ) {}
-
+    public record RegistroRequest(@NotNull @Valid PropietarioDatos propietario,
+                                  @NotNull @Valid MascotaDatos mascota) {}
     public record PropietarioDatos(
-            String nombre,
-            String cedula,
-            String telefono,
-            String correo
-    ) {}
-
+            @NotBlank @Size(max=100) String nombre,
+            @NotBlank @Size(max=30) String cedula,
+            @Size(max=20) String telefono,
+            @Email @Size(max=100) String correo) {}
     public record MascotaDatos(
-            String nombre,
-            String tipo,
-            String raza,
-            Integer edad,
-            String observaciones
-    ) {}
+            @NotBlank @Size(max=100) String nombre,
+            @NotBlank @Size(max=50) String tipo,
+            @Size(max=100) String raza,
+            @PositiveOrZero Integer edad,
+            @Size(max=5000) String observaciones) {}
 }

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+<title id="title">Huellitas, huella veterinaria</title>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08442F"/><stop offset="1" stop-color="#09835C"/></linearGradient></defs>
+<rect x="3" y="3" width="250" height="250" rx="63" fill="url(#bg)"/>
+<g fill="#D1F8DF">
+<ellipse cx="65" cy="98" rx="18" ry="25" transform="rotate(-27 65 98)"/>
+<ellipse cx="108" cy="70" rx="18" ry="26" transform="rotate(-10 108 70)"/>
+<ellipse cx="151" cy="70" rx="18" ry="26" transform="rotate(10 151 70)"/>
+<ellipse cx="194" cy="98" rx="18" ry="25" transform="rotate(27 194 98)"/>
+</g>
+<path fill="white" d="M128 116 C101 116 94 136 83 148 C71 162 62 175 71 192 C81 212 103 205 117 198 C124 194 131 194 139 198 C154 205 176 212 186 192 C195 175 185 161 173 148 C163 135 154 116 128 116Z"/>
+<path d="M124 149 H136 V161 H148 V173 H136 V185 H124 V173 H112 V161 H124Z" fill="#08734F"/>
+</svg>

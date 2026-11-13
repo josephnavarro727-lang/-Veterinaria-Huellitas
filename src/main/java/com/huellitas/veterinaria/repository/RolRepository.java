@@ -4,5 +4,6 @@ import com.huellitas.veterinaria.entity.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RolRepository extends JpaRepository<Rol, Integer> {
+    java.util.Optional<Rol> findByNombre(String nombre);
 
 }

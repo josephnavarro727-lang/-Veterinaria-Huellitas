@@ -1,0 +1,213 @@
+/* ============================================================
+   HUELLLITAS | SERVICIOS · VISUAL V2
+   Estilos limitados a la página de Servicios; no afectan citas,
+   registro, contacto, login ni el panel de usuarios.
+   ============================================================ */
+.pagina-servicios { background: #f6fbf9; }
+.pagina-servicios main > .contenedor { width: min(1420px, 96%); }
+.pagina-servicios .encabezado-principal { position: sticky; }
+
+/* Encabezado gráfico */
+.pagina-servicios .hero-servicios-visual {
+    position: relative; display: flex; align-items: center; justify-content: space-between;
+    margin: 20px 0 14px; padding: 24px clamp(22px, 5vw, 70px);
+    min-height: 187px; overflow: hidden; text-align: left;
+    border: 1px solid #d7eee4; border-radius: 24px;
+    background: linear-gradient(100deg, #e5f8f0 0%, #ecfaf5 52%, #d1efe3 100%);
+    box-shadow: 0 9px 30px rgba(6, 88, 58, .04);
+}
+.pagina-servicios .hero-servicios-visual::before,
+.pagina-servicios .hero-servicios-visual::after {
+    content: ""; position: absolute; pointer-events:none; border-radius: 50%;
+    background: rgba(92, 192, 159, .14);
+}
+.pagina-servicios .hero-servicios-visual::before { width:330px;height:165px;left:-170px;bottom:-122px; }
+.pagina-servicios .hero-servicios-visual::after { width:390px;height:190px;right:-170px;bottom:-135px; }
+.pagina-servicios .hero-servicios-copy { z-index: 1; position: relative; max-width: 650px; }
+.pagina-servicios .hero-servicios-visual .hero-etiqueta {
+    display: inline-flex; align-items:center; gap:12px; background:transparent;
+    border:0; padding:0; letter-spacing: 2.6px; color: #08734e;
+}
+.pagina-servicios .hero-etiqueta::after { content:"";display:block;width:39px;height:2px;background:#309c7b; }
+.pagina-servicios .hero-servicios-visual h1 {
+    margin:8px 0 7px; font-family:var(--fuente-titulo); font-size:clamp(36px, 4.2vw, 58px);
+    letter-spacing:-1.5px;line-height:1.05;color:#06462f;
+}
+.pagina-servicios .hero-servicios-visual p { margin: 0; font-size: 15px; line-height:1.5; max-width: 535px; }
+.pagina-servicios .hero-servicios-mascotas {
+    position:absolute;z-index:0;right:clamp(22px,6vw,110px);bottom:-1px;
+    width:clamp(260px,32vw,445px); height: 180px; object-fit:cover;object-position:center bottom;
+    mix-blend-mode:multiply; border-radius:18px 18px 0 0;
+}
+
+/* Filtros redondeados */
+.pagina-servicios .filtros-contenedor { margin: 16px auto 6px; }
+.pagina-servicios .filtros-servicios { background:transparent;border:0;box-shadow:none;gap:8px; }
+.pagina-servicios .filtro-btn {
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:39px;padding:9px 18px;border:1px solid #cde7dd;
+    border-radius:999px;background:#fff;color:#164e38;box-shadow:0 2px 6px rgba(12,74,49,.035);
+    font-size:12px;font-weight:800;transition:.2s ease;
+}
+.pagina-servicios .filtro-btn::before {font-size:17px;font-weight:800;line-height:1;}
+.pagina-servicios .filtro-btn[data-filtro="todos"]::before { content:"✥"; }
+.pagina-servicios .filtro-btn[data-filtro="salud"]::before { content:"✚"; }
+.pagina-servicios .filtro-btn[data-filtro="estetica"]::before { content:"✂"; }
+.pagina-servicios .filtro-btn[data-filtro="urgencias"]::before { content:"✚"; }
+.pagina-servicios .filtro-btn:hover { background:#eaf8f0;border-color:#9bd9b7;transform:translateY(-1px); }
+.pagina-servicios .filtro-btn.activo { background:linear-gradient(110deg,#0a6846,#075034);color:#fff;border-color:#075034;box-shadow:0 5px 14px rgba(7, 95, 59,.15); }
+.pagina-servicios .filtro-btn:focus-visible,.pagina-servicios .servicio-click:focus-visible {
+    outline:3px solid #3dbf95;outline-offset:3px;
+}
+.pagina-servicios .nota-precios { margin: 12px 0 0; color:#688176;text-align:center;font-size:11px; }
+
+/* Seis tarjetas compactas: fotografía izquierda, información derecha */
+.pagina-servicios .servicios-contenido {
+    margin: 14px 0 23px; padding: 8px 0; background:transparent;border:0;box-shadow:none;
+}
+.pagina-servicios .servicios-completos {
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;
+}
+.pagina-servicios .servicios-completos .servicio-click {
+    min-width:0;min-height:218px;display:grid;grid-template-columns:37% minmax(0,1fr);
+    border:1px solid #e0eee8;border-radius:15px;background:#fff;
+    box-shadow:0 6px 18px rgba(9,67,45,.045);overflow:hidden;
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.pagina-servicios .servicios-completos .servicio-click:hover {
+    transform:translateY(-3px);border-color:#acd8c5;box-shadow:0 12px 25px rgba(9,67,45,.09);
+}
+.pagina-servicios .servicio-click .tarjeta-imagen-contenedor {
+    position:relative;grid-column:1;height:100%;min-height:218px;background:#e6f1ec;
+}
+.pagina-servicios .servicio-click .tarjeta-imagen {
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
+}
+.pagina-servicios .servicio-click .tarjeta-etiqueta-categoria {
+    top:9px;left:8px;max-width:calc(100% - 16px);padding:5px 8px;
+    border:1px solid #cae7d8;background:rgba(239,250,245,.95);color:#0a6846;
+    font-size:9px;letter-spacing:0;line-height:1.2;text-align:center;
+    overflow-wrap:break-word;
+}
+.pagina-servicios .servicio-click .etiqueta-urgencia { background:#fff4f0;border-color:#f4d6c9;color:#a94c29; }
+.pagina-servicios .servicio-click .tarjeta-cuerpo {
+    position:relative;grid-column:2;min-width:0;padding:13px 11px 12px 13px;
+    display:flex;flex-direction:column;gap:0;text-align:left;
+}
+.pagina-servicios .servicio-click .tarjeta-cuerpo h3 {
+    width:calc(100% - 94px);font-size:clamp(13px,1.1vw,16px);font-weight:800;
+    line-height:1.15;min-height:27px;margin:14px 0 4px;color:#075138;
+}
+.pagina-servicios .servicio-click .servicio-descripcion {
+    width:calc(100% - 86px);min-height:0;margin:0 0 9px;font-size:11px;line-height:1.3;
+    color:#5b7569;
+}
+.pagina-servicios .servicio-click .tarjeta-precio-bloque,
+.pagina-servicios .servicio-click .precio-bloque-urgencia {
+    position:absolute;right:9px;top:28px;display:inline-flex;align-items:center;
+    width:auto;min-width:74px;margin:0;padding:8px 6px;border:0;border-radius:10px;
+    background:#e6f7ed;box-shadow:none;
+}
+.pagina-servicios .servicio-click .precio-bloque-urgencia {background:#e6f7ed;}
+.pagina-servicios .servicio-click .precio-encabezado {display:none;}
+.pagina-servicios .servicio-click .precio-monto,
+.pagina-servicios .servicio-click .precio-bloque-urgencia .precio-monto {
+    color:#075538;font-size:clamp(11px,1.02vw,15px);letter-spacing:-.25px;
+    line-height:1.25;white-space:nowrap;text-align:center;font-weight:800;
+}
+.pagina-servicios .servicio-click .tarjeta-caracteristicas {
+    display:flex;flex-direction:column;gap:4px;margin:0 0 9px;padding:0;
+    list-style:none;font-size:10.5px;line-height:1.25;color:#244a38;
+}
+.pagina-servicios .servicio-click .tarjeta-caracteristicas li {display:flex;align-items:flex-start;gap:5px;}
+.pagina-servicios .servicio-click .punto-verde {background:transparent;width:12px;height:auto;color:#078653;font-size:13px;}
+.pagina-servicios .servicio-click .tarjeta-acciones {display:flex;gap:6px;align-items:stretch;margin-top:auto;}
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-ver,
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-agendar-tarjeta {
+    flex:1;min-width:0;min-height:32px;display:flex;align-items:center;justify-content:center;
+    padding:6px 5px;margin:0;font-size:10.5px;border-radius:8px;
+    line-height:1.12;font-weight:800;text-decoration:none;white-space:normal;text-align:center;
+}
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-ver {background:#e5f5ed;border:1px solid #bcdfce;color:#0a5b3b;}
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-agendar-tarjeta {
+    border:1px solid #086140;background:linear-gradient(110deg,#067246,#085135);color:#fff;box-shadow:none;
+}
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-agendar-tarjeta::before {content:"▦";font-size:14px;margin-right:4px;}
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-ver:hover {background:#d2eddf;}
+.pagina-servicios .servicio-click .tarjeta-acciones .boton-agendar-tarjeta:hover {background:#064e34;}
+
+/* Tarifario en 6 columnas, ordenado y fácil de leer */
+.pagina-servicios .seccion-adicionales {
+    margin: 22px 0 40px;padding:25px 14px 20px;border:0;border-radius:22px;
+    background:linear-gradient(145deg,#eaf9f3,#dbf3e8);box-shadow:none;
+}
+.pagina-servicios .seccion-adicionales .titulo-seccion {max-width:920px;margin:0 auto 17px;}
+.pagina-servicios .seccion-adicionales .titulo-seccion .mini {background:transparent;border:0;padding:0;font-size:11px;}
+.pagina-servicios .seccion-adicionales .titulo-seccion h2 {font-size:clamp(26px, 3vw, 34px);line-height:1.15;letter-spacing:-.5px;margin:5px 0 7px;}
+.pagina-servicios .seccion-adicionales .titulo-seccion p {font-size:12px;line-height:1.5;}
+.pagina-servicios .grilla-tarifas-adicionales {
+    display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:0;
+}
+.pagina-servicios .tarifa-card {
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;
+    min-height:143px;padding:15px 10px;border-radius:14px;border:1px solid #e0f0e8;
+    background:#fff;box-shadow:0 3px 8px rgba(12,73,48,.035);
+    text-align:center;transition:transform .2s ease,box-shadow .2s ease;
+}
+.pagina-servicios .tarifa-card:hover {transform:translateY(-3px);box-shadow:0 10px 16px rgba(12,73,48,.08);}
+.pagina-servicios .tarifa-info {display:contents;}
+.pagina-servicios .tarifa-info > div {display:contents;}
+.pagina-servicios .tarifa-icono {
+    display:flex;align-items:center;justify-content:center;margin:0 auto 3px;
+    width:38px;height:31px;line-height:1;font-size:24px;background:transparent;
+}
+.pagina-servicios .tarifa-info strong {font-size:12px;line-height:1.2;min-height:28px;color:#183f2f;}
+.pagina-servicios .tarifa-info small {font-size:10.5px;line-height:1.3;color:#607a6d;min-height:25px;}
+.pagina-servicios .tarifa-precio {
+    margin:auto 0 0;padding:5px 14px;border-radius:999px;background:#dcf6e6;
+    color:#084c33;font-size:15px;font-weight:800;line-height:1.1;
+}
+.pagina-servicios .tarifas-aclaracion {margin:14px auto 0;color:#638276;text-align:center;font-size:10.5px;}
+.pagina-servicios .bloque-garantias {
+    margin-top:19px;padding-top:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;border-top:1px solid #c8e7d9;
+}
+.pagina-servicios .garantia-item {display:flex;align-items:center;gap:10px;}
+.pagina-servicios .garantia-icono {font-size:22px;width:38px;height:38px;background:#fff;border-radius:11px;}
+.pagina-servicios .garantia-item strong {font-size:12px;margin:0;color:#155338;}
+.pagina-servicios .garantia-item p {font-size:10.5px;color:#597568;}
+
+/* Responsive: tarjetas verticales en pantallas medianas y pequeñas */
+@media (max-width:1260px) {
+    .pagina-servicios .servicios-completos {grid-template-columns:repeat(2,minmax(0,1fr));}
+    .pagina-servicios .grilla-tarifas-adicionales {grid-template-columns:repeat(3,minmax(0,1fr));}
+    .pagina-servicios .servicio-click .tarjeta-cuerpo h3 {font-size:16px;}
+}
+@media (max-width:760px) {
+    .pagina-servicios main > .contenedor {width:min(100% - 24px,650px);}
+    .pagina-servicios .hero-servicios-visual {min-height:170px;padding:22px 25px;}
+    .pagina-servicios .hero-servicios-mascotas {right:-26px;width:300px;height:156px;opacity:.3;}
+    .pagina-servicios .hero-servicios-visual h1 {font-size:clamp(32px,7vw,43px);}
+    .pagina-servicios .hero-servicios-visual p {max-width:80%;font-size:13px;}
+    .pagina-servicios .filtros-servicios {gap:6px;}
+    .pagina-servicios .filtro-btn {min-height:36px;padding:8px 10px;font-size:11px;}
+    .pagina-servicios .servicios-completos {grid-template-columns:1fr;gap:13px;}
+    .pagina-servicios .grilla-tarifas-adicionales {grid-template-columns:repeat(2,minmax(0,1fr));}
+    .pagina-servicios .bloque-garantias {grid-template-columns:1fr;gap:10px;}
+}
+@media (max-width:420px) {
+    .pagina-servicios .hero-servicios-visual {padding:22px 16px;}
+    .pagina-servicios .hero-servicios-visual p {max-width:100%;}
+    .pagina-servicios .hero-servicios-mascotas {display:none;}
+    .pagina-servicios .servicios-completos .servicio-click {grid-template-columns:36% minmax(0,1fr);}
+    .pagina-servicios .servicio-click .tarjeta-cuerpo {padding:12px 8px;}
+    .pagina-servicios .servicio-click .tarjeta-precio-bloque {top:28px;right:6px;padding:6px 4px;min-width:65px;}
+    .pagina-servicios .servicio-click .tarjeta-cuerpo h3 {font-size:13px;width:calc(100% - 68px);}
+    .pagina-servicios .servicio-click .servicio-descripcion {width:calc(100% - 62px);font-size:10px;}
+    .pagina-servicios .servicio-click .tarjeta-caracteristicas {font-size:9.5px;}
+    .pagina-servicios .grilla-tarifas-adicionales {gap:8px;}
+    .pagina-servicios .tarifa-card {padding:10px 7px;}
+}
+@media (prefers-reduced-motion:reduce) {
+    .pagina-servicios .servicio-click, .pagina-servicios .tarifa-card, .pagina-servicios .filtro-btn {transition:none!important;transform:none!important;}
+}
