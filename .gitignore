@@ -36,3 +36,8 @@ build/
 .env
 .env.*
 application-local.properties
+# Utilidad temporal recibida; no distribuir credenciales de pruebas.
+src/test/java/com/huellitas/veterinaria/GeneradorHash.java
+
+# Documento académico privado: se entrega por separado de la rama pública.
+/docs/*.docx

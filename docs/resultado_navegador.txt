@@ -1,0 +1,6 @@
+OK: un formulario, un POST ante doble envío y cabecera CSRF presente.
+OK: enlace de login traducido.
+OK: datos completos de cita, selección conservada al traducir y conflicto visible sin borrar campos.
+OK: formulario de contacto.
+OK: modal de servicios conservado.
+OK: seis pantallas a 375 px sin desbordamiento horizontal ni errores JavaScript.

@@ -273,6 +273,9 @@
 
     </section>
 
+    <p sec:authorize="hasAnyRole('ADMIN','RECEPCIONISTA')" class="accesos-registro">
+        <a href="/registro">Registrar mascota</a> · <a href="/citas">Programar cita</a>
+    </p>
 </main>
 
 </body>

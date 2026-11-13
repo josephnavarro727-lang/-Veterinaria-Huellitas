@@ -1,0 +1,38 @@
+Resultados de pruebas ejecutadas el 13 de noviembre de 2026.
+Servidor: JDK 17, Spring Boot 4.1.1, H2 en memoria. No se utilizó MySQL.
+Comando: Maven clean package. Resultado: BUILD SUCCESS.
+
+com.huellitas.veterinaria.CorreccionesIntegrationTest: 26 pruebas, 0 fallos, 0 errores.
+  OK citasRechazanAnonimosYVeterinarios
+  OK registroAnonimoNoModificaPropietarioExistenteNiAgregaMascota
+  OK logoutInvalidaSesionYPanelRequiereNuevoLogin
+  OK reservasSimultaneasNoDuplicanElHorario
+  OK citaGuardaVeterinarioDuracionMotivoYEstadoPendiente
+  OK contactoSeGuardaYRechazaCorreoInvalido
+  OK registroPublicoCreaUnaMascotaYPropietario
+  OK loginFuncionaParaLosTresRoles
+  OK csrfProtegeTodosLosFormularios
+  OK citaRechazaMascotaInexistenteServicioInactivoYRolIncorrecto
+  OK detectaTraslapeQueCruzaMedianoche
+  OK citaRechazaFechaPasadaDuracionInvalidaYMotivoVacio
+  OK permiteMismaHoraConOtroVeterinario
+  OK recepcionAgregaMascotaSinSobrescribirPropietario
+  OK paginasPublicasRenderizanYRegistroTieneUnSoloFormulario
+  OK registroValidaEdadCorreoLongitudesYObjetosObligatorios
+  OK catalogoNoExponeHashYExcluyeVeterinariosInactivos
+  OK citaCanceladaNoBloqueaHorario
+  OK mismaClaveValidaDejaDeFuncionarAlDesactivarCuenta
+  OK citaRechazaVeterinarioInactivo
+  OK veterinarioNoModificaRegistrosExistentes
+  OK rutasPorRolTienenPermisosEnServidor
+  OK consultaDeMascotasYVeterinariosRequierePersonalAutorizado
+  OK panelSoloMuestraTarjetasDelRolActual
+  OK citaNoAceptaCambioDeEstadoOIdDesdeCliente
+  OK rechazaTraslapesDelMismoVeterinarioYPermiteCitasContiguas
+com.huellitas.veterinaria.UsuariosDemoConfigTest: 4 pruebas, 0 fallos, 0 errores.
+  OK colisionConCuentaAjenaCancelaSinModificarla
+  OK rechazaMasDe72BytesAntesDeBCrypt
+  OK creaTresCuentasConBCryptSinContraseñasFijas
+  OK faltaUnaClaveCancelaAntesDeGuardarCualquierCuenta
+com.huellitas.veterinaria.VeterinariaHuellitasApplicationTests: 1 pruebas, 0 fallos, 0 errores.
+  OK contextLoads

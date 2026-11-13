@@ -1,8 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Agendar cita en Clínica Veterinaria Huellitas">
@@ -86,9 +88,8 @@
                 Contacto
             </a>
 
-            <a href="/login" class="boton-login">
-                Iniciar sesión
-            </a>
+            <a href="/login" class="boton-login" sec:authorize="isAnonymous()" data-i18n="menuLogin">Iniciar sesión</a>
+            <a href="/panel" class="boton-login" sec:authorize="isAuthenticated()" data-i18n="menuPanel">Mi panel</a>
 
             <div class="selector-idioma">
 
@@ -138,7 +139,13 @@
 
         <section class="seccion limpia revelar">
 
-            <form id="formCita"
+            <div class="formulario" sec:authorize="!hasAnyRole('ADMIN','RECEPCIONISTA')">
+                <p data-i18n="citasAcceso">Las citas se programan con el personal de Recepción. Inicia sesión con una cuenta autorizada o contacta con la clínica.</p>
+                <a href="/login" class="boton boton-principal" data-i18n="menuLogin">Iniciar sesión</a>
+                <a href="/contacto" class="boton boton-secundario" data-i18n="menuContacto">Contacto</a>
+            </div>
+            <form id="formCita" method="post" th:action="@{/api/citas}"
+                  sec:authorize="hasAnyRole('ADMIN','RECEPCIONISTA')"
                   class="formulario formulario-amplio">
 
                 <fieldset>
@@ -220,6 +227,20 @@
 
                         </div>
 
+                        <div class="campo">
+                            <label for="veterinarioCita" data-i18n="citasVeterinario">Veterinario</label>
+                            <select id="veterinarioCita" name="id_veterinario" required>
+                                <option value="" data-i18n="citasSeleccioneVeterinario">Seleccione un veterinario</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="duracionCita" data-i18n="citasDuracion">Duración (minutos)</label>
+                            <input id="duracionCita" name="duracion_minutos" type="number" min="1" max="1440" value="30" required>
+                        </div>
+                        <div class="campo">
+                            <label for="motivoCita" data-i18n="citasMotivo">Motivo de consulta</label>
+                            <input id="motivoCita" name="motivo_consulta" type="text" maxlength="255" required>
+                        </div>
                         <div class="campo">
 
                             <label for="fechaCita"

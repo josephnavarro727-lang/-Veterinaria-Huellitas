@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
             menuRegistro: "Registrar mascota",
             menuCitas: "Agendar cita",
             menuContacto: "Contacto",
+            menuLogin: "Iniciar sesión", menuPanel: "Mi panel",
+            registroAviso: "Si ya estás registrado, contacta con Recepción para agregar otra mascota. Este formulario no modifica registros existentes.",
+            citasAcceso: "Las citas se programan con el personal de Recepción. Inicia sesión con una cuenta autorizada o contacta con la clínica.",
+            citasVeterinario: "Veterinario", citasSeleccioneVeterinario: "Seleccione un veterinario",
+            citasDuracion: "Duración (minutos)", citasMotivo: "Motivo de consulta",
 
             // Footer
             footerTitulo: "🐾 Veterinaria Huellitas",
@@ -264,6 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
             menuRegistro: "Register pet",
             menuCitas: "Book appointment",
             menuContacto: "Contact",
+            menuLogin: "Sign in", menuPanel: "My dashboard",
+            registroAviso: "Already registered? Contact reception to add another pet. This form does not change existing records.",
+            citasAcceso: "Reception staff schedule appointments. Sign in with an authorized account or contact the clinic.",
+            citasVeterinario: "Veterinarian", citasSeleccioneVeterinario: "Select a veterinarian",
+            citasDuracion: "Duration (minutes)", citasMotivo: "Reason for visit",
             // Footer
             footerTitulo: "🐾 Huellitas Veterinary Clinic",
             footerDescripcion:
@@ -728,10 +738,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    const actual =
-        window.location.pathname
-            .split("/")
-            .pop() || "/";
+    const actual = window.location.pathname;
 
 
     document.querySelectorAll(
@@ -1136,656 +1143,141 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    const formularioRegistro =
-        document.getElementById("formRegistro");
 
-
-    if (formularioRegistro) {
-
-        formularioRegistro.addEventListener(
-            "submit",
-            async evento => {
-
-                evento.preventDefault();
-
-                const boton =
-                    formularioRegistro.querySelector(
-                        'button[type="submit"]'
-                    );
-
-                let aviso =
-                    formularioRegistro.querySelector(
-                        ".mensaje-formulario"
-                    );
-
-                if (!aviso) {
-
-                    aviso =
-                        document.createElement("p");
-
-                    aviso.className =
-                        "mensaje-formulario";
-
-                    formularioRegistro.appendChild(
-                        aviso
-                    );
-
-                }
-
-
-                const datos = {
-                    propietario: {
-                        nombre: formularioRegistro.elements["dueno"].value.trim(),
-                        cedula: formularioRegistro.elements["cedula"].value.trim(),
-                        telefono: formularioRegistro.elements["telefono"].value.trim(),
-                        correo: formularioRegistro.elements["correo"].value.trim()
-                    },
-                    mascota: {
-                        nombre: formularioRegistro.elements["mascota"].value.trim(),
-                        tipo: formularioRegistro.elements["tipo"].value,
-                        raza: formularioRegistro.elements["raza"].value.trim(),
-                        edad: formularioRegistro.elements["edad"].value
-                            ? Number(formularioRegistro.elements["edad"].value)
-                            : null,
-                        observaciones: formularioRegistro.elements["observaciones"].value.trim()
-                    }
-                };
-
-
-                try {
-
-                    if (boton) {
-                        boton.disabled = true;
-                    }
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "Saving..."
-                            : "Guardando...";
-
-
-                    const respuesta =
-                        await fetch("/api/registrar", {
-
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(datos)
-
-                        });
-
-
-                    const resultado =
-                        await respuesta.json();
-
-
-                    if (!respuesta.ok) {
-
-                        throw new Error(
-                            resultado.mensaje ||
-                            "Error"
-                        );
-
-                    }
-
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "✓ Registration completed! Your pet was successfully registered at Huellitas Veterinary Clinic."
-                            : "✓ ¡Registro completado! Tu mascota fue registrada correctamente en Clínica Veterinaria Huellitas.";
-
-
-                    formularioRegistro.reset();
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "✗ The information could not be saved."
-                            : "✗ No se pudo guardar la información.";
-
-                } finally {
-
-                    if (boton) {
-                        boton.disabled = false;
-                    }
-
-                }
-
-            }
-        );
-
-    }
-
-
-    const formularioContacto =
-        document.getElementById("formContacto");
-
-
-    if (formularioContacto) {
-
-        formularioContacto.addEventListener(
-            "submit",
-            async evento => {
-
-                evento.preventDefault();
-
-                const boton =
-                    formularioContacto.querySelector(
-                        'button[type="submit"]'
-                    );
-
-                let aviso =
-                    formularioContacto.querySelector(
-                        ".mensaje-formulario"
-                    );
-
-                if (!aviso) {
-
-                    aviso =
-                        document.createElement("p");
-
-                    aviso.className =
-                        "mensaje-formulario";
-
-                    formularioContacto.appendChild(
-                        aviso
-                    );
-
-                }
-
-
-                const datos = {
-
-                    nombre:
-                        formularioContacto.nombre.value.trim(),
-
-                    correo:
-                        formularioContacto.correo.value.trim(),
-
-                    telefono:
-                        formularioContacto.telefono.value.trim(),
-
-                    motivo:
-                    formularioContacto.motivo.value,
-
-                    mensaje:
-                        formularioContacto.mensaje.value.trim()
-
-                };
-
-
-                try {
-
-                    if (boton) {
-                        boton.disabled = true;
-                    }
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "Sending..."
-                            : "Enviando...";
-
-
-                    const respuesta =
-                        await fetch("/api/contacto", {
-
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(datos)
-
-                        });
-
-
-                    const resultado =
-                        await respuesta.json();
-
-
-                    if (!respuesta.ok) {
-
-                        throw new Error(
-                            resultado.mensaje ||
-                            "Error"
-                        );
-
-                    }
-
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "✓  Message sent successfully! We will contact you soon."
-                            : "✓ ¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.";
-
-
-                    formularioContacto.reset();
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "✗ The inquiry could not be saved."
-                            : "✗ No se pudo guardar la consulta.";
-
-                } finally {
-
-                    if (boton) {
-                        boton.disabled = false;
-                    }
-
-                }
-
-            }
-        );
-
-    }
-
-
-    const btnBuscarMascotas =
-        document.getElementById(
-            "btnBuscarMascotas"
-        );
-
-    const cedulaCita =
-        document.getElementById(
-            "cedulaCita"
-        );
-
-    const mascotaCita =
-        document.getElementById(
-            "mascotaCita"
-        );
-
-    const servicioCita =
-        document.getElementById(
-            "servicioCita"
-        );
-
-    const formularioCita =
-        document.getElementById(
-            "formCita"
-        );
-
-
-
-    async function cargarServicios() {
-
-        if (!servicioCita) {
-            return;
+    // Cada formulario tiene un solo manejador y bloquea envíos mientras espera respuesta.
+    const ingles = () => idiomaActual === "en";
+    const avisoDe = formulario => {
+        let aviso = formulario.querySelector(".mensaje-formulario");
+        if (!aviso) {
+            aviso = document.createElement("p");
+            aviso.className = "mensaje-formulario";
+            aviso.setAttribute("role", "status");
+            aviso.setAttribute("aria-live", "polite");
+            formulario.appendChild(aviso);
         }
-
-        try {
-
-            const respuesta =
-                await fetch(
-                    "/api/servicios"
-                );
-
-            const resultado =
-                await respuesta.json();
-
-
-            servicioCita.innerHTML =
-                idiomaActual === "en"
-                    ? '<option value="">Select a service</option>'
-                    : '<option value="">Seleccione un servicio</option>';
-
-
-            if (
-                resultado.ok &&
-                resultado.servicios
-            ) {
-
-                resultado.servicios
-                    .forEach(servicio => {
-
-                        const opcion =
-                            document.createElement(
-                                "option"
-                            );
-
-                        opcion.value =
-                            servicio.id_servicio;
-
-                        const nombresServicios = {
-                            "Consulta veterinaria": "Veterinary consultation",
-                            "Vacunación": "Vaccination",
-                            "Baño y cuidado": "Bathing and care",
-                            "Peluquería": "Grooming",
-                            "Limpieza dental": "Dental cleaning",
-                            "Emergencias": "Emergency care"
-                        };
-
-                        opcion.textContent =
-                            idiomaActual === "en"
-                                ? (nombresServicios[servicio.nombre] || servicio.nombre)
-                                : servicio.nombre;
-
-                        servicioCita.appendChild(
-                            opcion
-                        );
-
-                    });
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Error cargando servicios:",
-                error
-            );
-
+        return aviso;
+    };
+    async function api(url, datos) {
+        const opciones = {headers: {"Accept": "application/json"}};
+        if (datos !== undefined) {
+            opciones.method = "POST";
+            opciones.headers["Content-Type"] = "application/json";
+            const token = document.querySelector('meta[name="_csrf"]')?.content;
+            const cabecera = document.querySelector('meta[name="_csrf_header"]')?.content;
+            if (token && cabecera) opciones.headers[cabecera] = token;
+            opciones.body = JSON.stringify(datos);
         }
-
+        const respuesta = await fetch(url, opciones);
+        const resultado = await respuesta.json().catch(() => ({}));
+        if (!respuesta.ok) throw new Error(resultado.mensaje || (ingles()
+            ? "Unable to complete the request. Reload the page and try again."
+            : "No se pudo completar la solicitud. Recarga la página e inténtalo de nuevo."));
+        return resultado;
     }
-
-
-    if (servicioCita) {
-
-        cargarServicios();
-
-    }
-
-
-    if (selectorIdioma) {
-
-        selectorIdioma.addEventListener(
-            "change",
-            () => {
-
-                if (
-                    mascotaCita &&
-                    !mascotaCita.value
-                ) {
-
-                    mascotaCita.innerHTML =
-                        idiomaActual === "en"
-                            ? '<option value="">Search by ID first</option>'
-                            : '<option value="">Primero busque por cédula</option>';
-
-                }
-
-                if (servicioCita) {
-
-                    cargarServicios();
-
-                }
-
+    function conectarFormulario(formulario, url, construir, exito, despues) {
+        if (!formulario || formulario.dataset.conectado) return;
+        formulario.dataset.conectado = "true";
+        let enviando = false;
+        formulario.addEventListener("submit", async evento => {
+            evento.preventDefault();
+            if (enviando || !formulario.reportValidity()) return;
+            enviando = true;
+            const boton = formulario.querySelector('button[type="submit"]');
+            const aviso = avisoDe(formulario);
+            if (boton) boton.disabled = true;
+            try {
+                aviso.textContent = ingles() ? "Saving..." : "Guardando...";
+                await api(url, construir(formulario));
+                aviso.textContent = exito();
+                formulario.reset();
+                if (despues) despues();
+            } catch (error) {
+                aviso.textContent = error.message;
+            } finally {
+                enviando = false;
+                if (boton) boton.disabled = false;
             }
-        );
-
+        });
     }
+    conectarFormulario(document.getElementById("formRegistro"), "/api/registrar", f => ({
+        propietario: {
+            nombre: f.elements.dueno.value.trim(), cedula: f.elements.cedula.value.trim(),
+            telefono: f.elements.telefono.value.trim(), correo: f.elements.correo.value.trim()
+        },
+        mascota: {
+            nombre: f.elements.mascota.value.trim(), tipo: f.elements.tipo.value,
+            raza: f.elements.raza.value.trim(), edad: f.elements.edad.value ? Number(f.elements.edad.value) : null,
+            observaciones: f.elements.observaciones.value.trim()
+        }
+    }), () => ingles() ? "✓ Pet registered successfully." : "✓ Mascota registrada correctamente.");
+    conectarFormulario(document.getElementById("formContacto"), "/api/contacto", f => ({
+        nombre: f.elements.nombre.value.trim(), correo: f.elements.correo.value.trim(),
+        telefono: f.elements.telefono.value.trim(), motivo: f.elements.motivo.value,
+        mensaje: f.elements.mensaje.value.trim()
+    }), () => ingles() ? "✓ Message sent successfully." : "✓ Mensaje enviado correctamente.");
 
-
-    if (
-        btnBuscarMascotas &&
-        cedulaCita &&
-        mascotaCita
-    ) {
-
-        btnBuscarMascotas.addEventListener(
-            "click",
-            async () => {
-
-                const cedula =
-                    cedulaCita.value.trim();
-
-
-                if (!cedula) {
-
-                    alert(
-                        idiomaActual === "en"
-                            ? "Enter the owner's ID number."
-                            : "Digite la cédula del propietario."
-                    );
-
-                    return;
-
-                }
-
-
-                mascotaCita.innerHTML =
-                    idiomaActual === "en"
-                        ? '<option value="">Searching...</option>'
-                        : '<option value="">Buscando...</option>';
-
-
-                try {
-
-                    const respuesta =
-                        await fetch(
-                            "/api/mascotas/" +
-                            encodeURIComponent(
-                                cedula
-                            )
-                        );
-
-
-                    const resultado =
-                        await respuesta.json();
-
-
-                    mascotaCita.innerHTML = "";
-
-
-                    if (
-                        resultado.ok &&
-                        resultado.mascotas.length > 0
-                    ) {
-
-                        const inicial =
-                            document.createElement(
-                                "option"
-                            );
-
-                        inicial.value = "";
-
-                        inicial.textContent =
-                            idiomaActual === "en"
-                                ? "Select your pet"
-                                : "Seleccione su mascota";
-
-                        mascotaCita.appendChild(
-                            inicial
-                        );
-
-
-                        resultado.mascotas
-                            .forEach(mascota => {
-
-                                const opcion =
-                                    document.createElement(
-                                        "option"
-                                    );
-
-                                opcion.value =
-                                    mascota.id_mascota;
-
-                                opcion.textContent =
-                                    mascota.nombre +
-                                    " - " +
-                                    mascota.tipo;
-
-                                mascotaCita.appendChild(
-                                    opcion
-                                );
-
-                            });
-
-                    } else {
-
-                        mascotaCita.innerHTML =
-                            idiomaActual === "en"
-                                ? '<option value="">No pets found</option>'
-                                : '<option value="">No se encontraron mascotas</option>';
-
-                    }
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    mascotaCita.innerHTML =
-                        idiomaActual === "en"
-                            ? '<option value="">Search error</option>'
-                            : '<option value="">Error en la búsqueda</option>';
-
-                }
-
-            }
-        );
-
-    }
-
-
+    const formularioCita = document.getElementById("formCita");
     if (formularioCita) {
-
-        formularioCita.addEventListener(
-            "submit",
-            async evento => {
-
-                evento.preventDefault();
-
-
-                const datos = {
-
-                    id_mascota:
-                    mascotaCita.value,
-
-                    id_servicio:
-                    servicioCita.value,
-
-                    fecha:
-                    document.getElementById(
-                        "fechaCita"
-                    ).value,
-
-                    hora:
-                    document.getElementById(
-                        "horaCita"
-                    ).value,
-
-                    observaciones:
-                        document.getElementById(
-                            "observacionesCita"
-                        ).value.trim()
-
-                };
-
-
-                let aviso =
-                    formularioCita.querySelector(
-                        ".mensaje-formulario"
-                    );
-
-
-                if (!aviso) {
-
-                    aviso =
-                        document.createElement(
-                            "p"
-                        );
-
-                    aviso.className =
-                        "mensaje-formulario";
-
-                    formularioCita.appendChild(
-                        aviso
-                    );
-
-                }
-
-
-                try {
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "Scheduling appointment..."
-                            : "Agendando cita...";
-
-
-                    const respuesta =
-                        await fetch(
-                            "/api/citas",
-                            {
-
-                                method: "POST",
-
-                                headers: {
-
-                                    "Content-Type":
-                                        "application/json"
-
-                                },
-
-                                body:
-                                    JSON.stringify(
-                                        datos
-                                    )
-
-                            }
-                        );
-
-
-                    const resultado =
-                        await respuesta.json();
-
-
-                    if (!respuesta.ok) {
-
-                        throw new Error(
-                            resultado.mensaje
-                        );
-
-                    }
-
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "✓ Appointment scheduled successfully! We look forward to seeing you at Huellitas Veterinary Clinic."
-                            : "✓ ¡Cita agendada correctamente! Te esperamos en Clínica Veterinaria Huellitas.";
-
-
-                    formularioCita.reset();
-
-
-                    mascotaCita.innerHTML =
-                        idiomaActual === "en"
-                            ? '<option value="">Search by ID first</option>'
-                            : '<option value="">Primero busque por cédula</option>';
-
-
-                    cargarServicios();
-
-                } catch (error) {
-
-                    console.error(error);
-
-                    aviso.textContent =
-                        idiomaActual === "en"
-                            ? "✗ The appointment could not be scheduled."
-                            : "✗ No se pudo agendar la cita.";
-
-                }
-
+        const mascotas = document.getElementById("mascotaCita");
+        const servicios = document.getElementById("servicioCita");
+        const veterinarios = document.getElementById("veterinarioCita");
+        const buscar = document.getElementById("btnBuscarMascotas");
+        const limpiarMascotas = () => {
+            mascotas.replaceChildren(new Option(ingles() ? "Search by ID first" : "Primero busque por cédula", ""));
+        };
+        const nombresServicios = {
+            "Consulta veterinaria": "Veterinary consultation", "Consulta general": "General consultation",
+            "Vacunación": "Vaccination", "Control": "Follow-up", "Baño y cuidado": "Bathing and care",
+            "Peluquería": "Grooming", "Limpieza dental": "Dental cleaning", "Emergencias": "Emergency care"
+        };
+        let catalogos = null;
+        const mostrarCatalogos = () => {
+            if (!catalogos) return;
+            const servicioPrevio = servicios.value;
+            const vetPrevio = veterinarios.value;
+            servicios.replaceChildren(new Option(ingles() ? "Select a service" : "Seleccione un servicio", ""));
+            for (const servicio of catalogos.servicios) {
+                servicios.add(new Option(ingles() ? (nombresServicios[servicio.nombre] || servicio.nombre) : servicio.nombre, servicio.id_servicio));
             }
-        );
-
+            veterinarios.replaceChildren(new Option(ingles() ? "Select a veterinarian" : "Seleccione un veterinario", ""));
+            for (const vet of catalogos.veterinarios) veterinarios.add(new Option(vet.nombre, vet.id_veterinario));
+            servicios.value = servicioPrevio;
+            veterinarios.value = vetPrevio;
+        };
+        Promise.all([api("/api/servicios"), api("/api/veterinarios")]).then(([s, v]) => {
+            catalogos = {servicios: s.servicios, veterinarios: v.veterinarios};
+            mostrarCatalogos();
+            if (!catalogos.veterinarios.length) avisoDe(formularioCita).textContent = ingles()
+                ? "No active veterinarians are available. Contact the administrator."
+                : "No hay veterinarios activos disponibles. Consulta con Administración.";
+        }).catch(error => { avisoDe(formularioCita).textContent = error.message; });
+        selectorIdioma?.addEventListener("change", mostrarCatalogos);
+        document.getElementById("cedulaCita").addEventListener("input", limpiarMascotas);
+        buscar.addEventListener("click", async () => {
+            const cedula = document.getElementById("cedulaCita").value.trim();
+            limpiarMascotas();
+            if (!cedula) {
+                avisoDe(formularioCita).textContent = ingles() ? "Enter the owner's ID number." : "Digite la cédula del propietario.";
+                return;
+            }
+            buscar.disabled = true;
+            try {
+                const datos = await api("/api/mascotas/" + encodeURIComponent(cedula));
+                // Ignora una respuesta si la cédula cambió durante la búsqueda.
+                if (cedula !== document.getElementById("cedulaCita").value.trim()) return;
+                mascotas.replaceChildren(new Option(ingles() ? "Select your pet" : "Seleccione su mascota", ""));
+                for (const m of datos.mascotas) mascotas.add(new Option(m.nombre + " - " + m.tipo, m.id_mascota));
+                avisoDe(formularioCita).textContent = datos.mascotas.length ? "" :
+                    (ingles() ? "No pets found." : "No se encontraron mascotas.");
+            } catch (error) { avisoDe(formularioCita).textContent = error.message; }
+            finally { buscar.disabled = false; }
+        });
+        formularioCita.addEventListener("reset", () => { limpiarMascotas(); });
+        conectarFormulario(formularioCita, "/api/citas", f => ({
+            id_mascota: Number(mascotas.value), id_servicio: Number(servicios.value),
+            id_veterinario: Number(veterinarios.value), fecha: f.elements.fecha.value, hora: f.elements.hora.value,
+            duracion_minutos: Number(f.elements.duracion_minutos.value),
+            motivo_consulta: f.elements.motivo_consulta.value.trim(), observaciones: f.elements.observaciones.value.trim()
+        }), () => ingles() ? "✓ Appointment scheduled successfully." : "✓ Cita agendada correctamente.");
     }
-
 });
