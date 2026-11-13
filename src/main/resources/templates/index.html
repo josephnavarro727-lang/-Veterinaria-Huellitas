@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,541 +8,575 @@
     <meta name="description" content="Veterinaria Huellitas: atención, prevención y bienestar para tus mascotas.">
     <link rel="icon" href="/HuellitasIcono.ico" type="image/x-icon">
     <link rel="stylesheet" href="/estilos.css">
+
     <title>Veterinaria Huellitas | Inicio</title>
+
+    <style>
+        .menu-principal .boton-login {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #167347;
+            color: white !important;
+            padding: 10px 16px;
+            border-radius: 9px;
+            font-weight: bold;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background-color 0.2s ease;
+        }
+
+        .menu-principal .boton-login:hover,
+        .menu-principal .boton-login:focus-visible {
+            background-color: #105737;
+            color: white !important;
+        }
+    </style>
 </head>
 
 <body>
 
-
-    <div class="topbar">
-        <div class="topbar-contenido">
-            <span data-i18n="topTelefono"> 8888-8888</span>
-            <span data-i18n="topHorario"> Lun–Sáb · 8:00 a. m. – 6:00 p. m.</span>
-            <span data-i18n="topUbicacion"> Pérez Zeledón, Costa Rica</span>
-        </div>
+<div class="topbar">
+    <div class="topbar-contenido">
+        <span data-i18n="topTelefono">8888-8888</span>
+        <span data-i18n="topHorario">
+                Lun–Sáb · 8:00 a. m. – 6:00 p. m.
+            </span>
+        <span data-i18n="topUbicacion">
+                Pérez Zeledón, Costa Rica
+            </span>
     </div>
+</div>
 
-    <header class="encabezado-principal">
-        <div class="barra-navegacion">
+<header class="encabezado-principal">
+    <div class="barra-navegacion">
 
-            <a class="marca" href="/" aria-label="Ir al inicio">
-                <span class="marca-icono"><img src="/Huellitas.png" alt="Huellitas"></span>
-
-                <span>
-                    <strong data-i18n="marcaNombre">Veterinaria Huellitas</strong>
-                    <small data-i18n="marcaSubtitulo">Salud y bienestar animal</small>
+        <a class="marca" href="/" aria-label="Ir al inicio">
+                <span class="marca-icono">
+                    <img src="/Huellitas.png" alt="Huellitas">
                 </span>
+
+            <span>
+                    <strong data-i18n="marcaNombre">
+                        Veterinaria Huellitas
+                    </strong>
+                    <small data-i18n="marcaSubtitulo">
+                        Salud y bienestar animal
+                    </small>
+                </span>
+        </a>
+
+        <button class="menu-btn"
+                type="button"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="menu-principal">
+
+            <a href="/" data-i18n="menuInicio">
+                Inicio
             </a>
 
-            <button class="menu-btn"
-                    type="button"
-                    aria-label="Abrir menú"
-                    aria-expanded="false">
-                ☰
-            </button>
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
 
-                    <nav class="menu-principal">
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
 
-                        <a href="/"
-                        data-i18n="menuInicio">
-                            Inicio
-                        </a>
+            <a href="/citas" data-i18n="menuCitas">
+                Agendar cita
+            </a>
 
-                        <a href="/servicios"
-                        data-i18n="menuServicios">
-                            Servicios
-                        </a>
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
 
-                        <a href="/registro"
-                        data-i18n="menuRegistro">
-                            Registrar mascota
-                        </a>
+            <a href="/login" class="boton-login">
+                Iniciar sesión
+            </a>
 
-                        <a href="/citas"
-                        data-i18n="menuCitas">
-                            Agendar cita
-                        </a>
+            <div class="selector-idioma">
+                <select id="selectorIdioma">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
 
-                        <a href="/contacto"
-                        data-i18n="menuContacto">
-                            Contacto
-                        </a>
+        </nav>
+    </div>
+</header>
 
-                        <div class="selector-idioma">
+<main class="main-sin-margen">
 
-                            <select id="selectorIdioma">
+    <section class="hero">
 
-                                <option value="es">
-                                    ES
-                                </option>
+        <img src="/veterinaria.png"
+             alt="Fachada de Veterinaria Huellitas"
+             data-i18n-alt="heroImagenAlt">
 
-                                <option value="en">
-                                    EN
-                                </option>
+        <div class="hero-capa"></div>
 
-                            </select>
-
-                        </div>
-
-                    </nav>
-
-        </div>
-    </header>
-
-    <main class="main-sin-margen">
->
-        <section class="hero">
-
-            <img src="/veterinaria.png"
-                 alt="Fachada de Veterinaria Huellitas"
-                 data-i18n-alt="heroImagenAlt">
-
-            <div class="hero-capa"></div>
-
-            <div class="hero-contenido revelar">
+        <div class="hero-contenido revelar">
 
                 <span class="etiqueta"
                       data-i18n="heroEtiqueta">
                     Cuidado veterinario con corazón
                 </span>
 
-                <h1>
+            <h1>
                     <span data-i18n="heroTitulo1">
                         Cuidamos a quienes
                     </span>
 
-                    <span data-i18n="heroTitulo2">
+                <span data-i18n="heroTitulo2">
                         más quieres
                     </span>
-                </h1>
+            </h1>
 
-                <p data-i18n="heroTexto">
-                    Atención preventiva, consultas, vacunación y bienestar
-                    para acompañar a tu mascota en cada etapa.
-                </p>
+            <p data-i18n="heroTexto">
+                Atención preventiva, consultas, vacunación y bienestar
+                para acompañar a tu mascota en cada etapa.
+            </p>
 
-                <div class="hero-botones">
+            <div class="hero-botones">
 
-                    <a class="boton boton-principal"
-                       href="/contacto"
-                       data-i18n="heroCita">
-                        Solicitar cita
-                    </a>
+                <a class="boton boton-principal"
+                   href="/contacto"
+                   data-i18n="heroCita">
+                    Solicitar cita
+                </a>
 
-                    <a class="boton boton-secundario"
-                       href="/servicios"
-                       data-i18n="heroServicios">
-                        Ver servicios
-                    </a>
-
-                </div>
+                <a class="boton boton-secundario"
+                   href="/servicios"
+                   data-i18n="heroServicios">
+                    Ver servicios
+                </a>
 
             </div>
 
-        </section>
+        </div>
 
-        <section class="franja-confianza">
+    </section>
 
-            <div class="confianza-item revelar">
-                <strong data-i18n="confServiciosNumero">6+</strong>
-                <span data-i18n="confServicios">Servicios principales</span>
-            </div>
+    <section class="franja-confianza">
 
-            <div class="confianza-item revelar">
-                <strong data-i18n="confAtencionTitulo">Atención</strong>
-                <span data-i18n="confAtencionTexto">Personalizada</span>
-            </div>
+        <div class="confianza-item revelar">
+            <strong data-i18n="confServiciosNumero">6+</strong>
+            <span data-i18n="confServicios">
+                    Servicios principales
+                </span>
+        </div>
 
-            <div class="confianza-item revelar">
-                <strong data-i18n="confBienestarTitulo">Bienestar</strong>
-                <span data-i18n="confBienestarTexto">Como prioridad</span>
-            </div>
+        <div class="confianza-item revelar">
+            <strong data-i18n="confAtencionTitulo">
+                Atención
+            </strong>
+            <span data-i18n="confAtencionTexto">
+                    Personalizada
+                </span>
+        </div>
 
-        </section>
+        <div class="confianza-item revelar">
+            <strong data-i18n="confBienestarTitulo">
+                Bienestar
+            </strong>
+            <span data-i18n="confBienestarTexto">
+                    Como prioridad
+                </span>
+        </div>
 
+    </section>
 
-        <div class="contenedor">
+    <div class="contenedor">
 
-            <section class="seccion limpia revelar">
+        <section class="seccion limpia revelar">
 
-                <div class="titulo-seccion">
+            <div class="titulo-seccion">
 
                     <span class="mini"
                           data-i18n="inicioMiniServicios">
                         Lo que hacemos
                     </span>
 
-                    <h2 data-i18n="inicioTituloServicios">
-                        Servicios para cada etapa de tu mascota
-                    </h2>
+                <h2 data-i18n="inicioTituloServicios">
+                    Servicios para cada etapa de tu mascota
+                </h2>
 
-                    <p data-i18n="inicioTextoServicios">
-                        Desde una revisión preventiva hasta cuidados de higiene
-                        y atención urgente.
+                <p data-i18n="inicioTextoServicios">
+                    Desde una revisión preventiva hasta cuidados de higiene
+                    y atención urgente.
+                </p>
+
+            </div>
+
+            <div class="servicios servicios-destacados">
+
+                <article class="tarjeta tarjeta-icono">
+
+                    <img class="icono-servicio"
+                         src="/estetoscopio.avif"
+                         alt="Estetoscopio">
+
+                    <h3 data-i18n="servicioConsultaTitulo">
+                        Consulta veterinaria
+                    </h3>
+
+                    <p data-i18n="servicioConsultaResumen">
+                        Valoración general y recomendaciones de cuidado.
                     </p>
 
-                </div>
+                </article>
 
+                <article class="tarjeta tarjeta-icono">
 
-                <div class="servicios servicios-destacados">
+                    <img class="icono-servicio"
+                         src="/inyeccion.jpg"
+                         alt="Inyección para vacunación">
 
-                    <article class="tarjeta tarjeta-icono">
+                    <h3 data-i18n="servicioVacunacionTitulo">
+                        Vacunación
+                    </h3>
 
-                        <img class="icono-servicio" src="/estetoscopio.avif" alt="Estetoscopio">
+                    <p data-i18n="servicioVacunacionResumen">
+                        Control del esquema de vacunas y refuerzos.
+                    </p>
 
-                        <h3 data-i18n="servicioConsultaTitulo">
-                            Consulta veterinaria
-                        </h3>
+                </article>
 
-                        <p data-i18n="servicioConsultaResumen">
-                            Valoración general y recomendaciones de cuidado.
-                        </p>
+                <article class="tarjeta tarjeta-icono">
 
-                    </article>
+                    <img class="icono-servicio"
+                         src="/tina.avif"
+                         alt="Tina para baño de mascotas">
 
+                    <h3 data-i18n="servicioBanoTitulo">
+                        Baño y cuidado
+                    </h3>
 
-                    <article class="tarjeta tarjeta-icono">
+                    <p data-i18n="servicioBanoResumen">
+                        Higiene y bienestar para perros y gatos.
+                    </p>
 
-                        <img class="icono-servicio" src="/inyeccion.jpg" alt="Inyección para vacunación">
+                </article>
 
-                        <h3 data-i18n="servicioVacunacionTitulo">
-                            Vacunación
-                        </h3>
+            </div>
 
-                        <p data-i18n="servicioVacunacionResumen">
-                            Control del esquema de vacunas y refuerzos.
-                        </p>
+            <div class="centrado">
 
-                    </article>
+                <a class="boton boton-principal"
+                   href="/servicios"
+                   data-i18n="inicioTodosServicios">
+                    Conocer todos los servicios
+                </a>
 
+            </div>
 
-                    <article class="tarjeta tarjeta-icono">
+        </section>
 
-                        <img class="icono-servicio" src="/tina.avif" alt="Tina para baño de mascotas">
+        <section class="seccion limpia por-que revelar">
 
-                        <h3 data-i18n="servicioBanoTitulo">
-                            Baño y cuidado
-                        </h3>
+            <div class="titulo-seccion">
 
-                        <p data-i18n="servicioBanoResumen">
-                            Higiene y bienestar para perros y gatos.
-                        </p>
-
-                    </article>
-
-                </div>
-
-
-                <div class="centrado">
-
-                    <a class="boton boton-principal"
-                       href="/servicios"
-                       data-i18n="inicioTodosServicios">
-                        Conocer todos los servicios
-                    </a>
-
-                </div>
-
-            </section>
-
-            <section class="seccion limpia por-que revelar">
-
-                <div class="titulo-seccion">
-
-                    <span class="mini"
-                          data-i18n="porqueMini">
+                    <span class="mini" data-i18n="porqueMini">
                         ¿Por qué Huellitas?
                     </span>
 
-                    <h2 data-i18n="porqueTitulo">
-                        Un espacio pensado para ellos
-                    </h2>
+                <h2 data-i18n="porqueTitulo">
+                    Un espacio pensado para ellos
+                </h2>
 
-                </div>
+            </div>
 
+            <div class="beneficios-grid">
 
-                <div class="beneficios-grid">
+                <div class="beneficio">
 
-                    <div class="beneficio">
+                    <span></span>
 
-                        <span></span>
+                    <div>
+                        <h3 data-i18n="beneficioTratoTitulo">
+                            Trato cercano
+                        </h3>
 
-                        <div>
-                            <h3 data-i18n="beneficioTratoTitulo">
-                                Trato cercano
-                            </h3>
-
-                            <p data-i18n="beneficioTratoTexto">
-                                Escuchamos tus dudas y cuidamos a tu mascota
-                                con paciencia.
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="beneficio">
-
-                        <span></span>
-
-                        <div>
-                            <h3 data-i18n="beneficioPrevencionTitulo">
-                                Prevención primero
-                            </h3>
-
-                            <p data-i18n="beneficioPrevencionTexto">
-                                Promovemos revisiones y cuidados para prevenir
-                                problemas.
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="beneficio">
-
-                        <span></span>
-
-                        <div>
-                            <h3 data-i18n="beneficioSeguimientoTitulo">
-                                Seguimiento
-                            </h3>
-
-                            <p data-i18n="beneficioSeguimientoTexto">
-                                El registro de tu mascota ayuda a mantener
-                                su información organizada.
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <div class="beneficio">
-
-                        <span></span>
-
-                        <div>
-                            <h3 data-i18n="beneficioContactoTitulo">
-                                Contacto sencillo
-                            </h3>
-
-                            <p data-i18n="beneficioContactoTexto">
-                                Puedes escribirnos por WhatsApp o mediante
-                                nuestro formulario.
-                            </p>
-                        </div>
-
+                        <p data-i18n="beneficioTratoTexto">
+                            Escuchamos tus dudas y cuidamos a tu mascota
+                            con paciencia.
+                        </p>
                     </div>
 
                 </div>
 
-            </section>
+                <div class="beneficio">
 
-            <section class="seccion limpia revelar">
+                    <span></span>
 
-                <div class="titulo-seccion">
+                    <div>
+                        <h3 data-i18n="beneficioPrevencionTitulo">
+                            Prevención primero
+                        </h3>
+
+                        <p data-i18n="beneficioPrevencionTexto">
+                            Promovemos revisiones y cuidados para prevenir
+                            problemas.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="beneficio">
+
+                    <span></span>
+
+                    <div>
+                        <h3 data-i18n="beneficioSeguimientoTitulo">
+                            Seguimiento
+                        </h3>
+
+                        <p data-i18n="beneficioSeguimientoTexto">
+                            El registro de tu mascota ayuda a mantener
+                            su información organizada.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="beneficio">
+
+                    <span></span>
+
+                    <div>
+                        <h3 data-i18n="beneficioContactoTitulo">
+                            Contacto sencillo
+                        </h3>
+
+                        <p data-i18n="beneficioContactoTexto">
+                            Puedes escribirnos por WhatsApp o mediante
+                            nuestro formulario.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="seccion limpia revelar">
+
+            <div class="titulo-seccion">
 
                     <span class="mini"
-                        data-i18n="testimonioMini">
+                          data-i18n="testimonioMini">
                         Experiencia
                     </span>
 
-                    <h2 data-i18n="testimonioTitulo">
-                        Lo que valoran nuestros clientes
-                    </h2>
+                <h2 data-i18n="testimonioTitulo">
+                    Lo que valoran nuestros clientes
+                </h2>
 
-                </div>
+            </div>
 
+            <div class="testimonios">
 
-                <div class="testimonios">
+                <blockquote>
 
-                    <blockquote>
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
 
-                        <div class="estrellas">
-                            ★★★★★
-                        </div>
+                    <p data-i18n="testimonio1">
+                        “Excelente atención. Revisaron a mi perro con mucha
+                        paciencia y me explicaron claramente todos los cuidados
+                        que debía seguir.”
+                    </p>
 
-                        <p data-i18n="testimonio1">
-                            “Excelente atención. Revisaron a mi perro con mucha
-                            paciencia y me explicaron claramente todos los cuidados
-                            que debía seguir.”
-                        </p>
+                    <cite data-i18n="testimonioAutor1">
+                        — María R. · Dueña de Max
+                    </cite>
 
-                        <cite data-i18n="testimonioAutor1">
-                            — María R. · Dueña de Max
-                        </cite>
+                </blockquote>
 
-                    </blockquote>
+                <blockquote>
 
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
 
-                    <blockquote>
+                    <p data-i18n="testimonio2">
+                        “Llevé a mi gata para su vacunación y el trato fue
+                        excelente. El personal fue muy amable y cuidadoso con ella.”
+                    </p>
 
-                        <div class="estrellas">
-                            ★★★★★
-                        </div>
+                    <cite data-i18n="testimonioAutor2">
+                        — Carlos M. · Dueño de Luna
+                    </cite>
 
-                        <p data-i18n="testimonio2">
-                            “Llevé a mi gata para su vacunación y el trato fue
-                            excelente. El personal fue muy amable y cuidadoso con ella.”
-                        </p>
+                </blockquote>
 
-                        <cite data-i18n="testimonioAutor2">
-                            — Carlos M. · Dueño de Luna
-                        </cite>
+                <blockquote>
 
-                    </blockquote>
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
 
+                    <p data-i18n="testimonio3">
+                        “Me gustó mucho el servicio de baño y cuidado.
+                        Mi mascota quedó muy limpia y se nota que trabajan
+                        con cariño y dedicación.”
+                    </p>
 
+                    <cite data-i18n="testimonioAutor3">
+                        — Andrea S. · Dueña de Toby
+                    </cite>
 
-                    <blockquote>
+                </blockquote>
 
-                        <div class="estrellas">
-                            ★★★★★
-                        </div>
+                <blockquote>
 
-                        <p data-i18n="testimonio3">
-                            “Me gustó mucho el servicio de baño y cuidado.
-                            Mi mascota quedó muy limpia y se nota que trabajan
-                            con cariño y dedicación.”
-                        </p>
+                    <div class="estrellas">
+                        ★★★★★
+                    </div>
 
-                        <cite data-i18n="testimonioAutor3">
-                            — Andrea S. · Dueña de Toby
-                        </cite>
+                    <p data-i18n="testimonio4">
+                        “La página me permitió encontrar rápidamente la
+                        información que necesitaba y contactar con la
+                        veterinaria sin complicaciones.”
+                    </p>
 
-                    </blockquote>
+                    <cite data-i18n="testimonioAutor4">
+                        — Daniel V. · Dueño de Rocky
+                    </cite>
 
+                </blockquote>
 
-                    <blockquote>
+            </div>
 
-                        <div class="estrellas">
-                            ★★★★★
-                        </div>
+        </section>
 
-                        <p data-i18n="testimonio4">
-                            “La página me permitió encontrar rápidamente la
-                            información que necesitaba y contactar con la
-                            veterinaria sin complicaciones.”
-                        </p>
+        <section class="cta revelar">
 
-                        <cite data-i18n="testimonioAutor4">
-                            — Daniel V. · Dueño de Rocky
-                        </cite>
-
-                    </blockquote>
-
-                </div>
-
-            </section>
-
-
-            <section class="cta revelar">
-
-                <div>
+            <div>
 
                     <span class="mini mini-claro"
                           data-i18n="ctaMini">
                         Estamos para ayudarte
                     </span>
 
-                    <h2 data-i18n="ctaTitulo">
-                        ¿Tu mascota necesita atención?
-                    </h2>
+                <h2 data-i18n="ctaTitulo">
+                    ¿Tu mascota necesita atención?
+                </h2>
 
-                    <p data-i18n="ctaTexto">
-                        Cuéntanos qué necesitas y te orientamos.
-                    </p>
-
-                </div>
-
-
-                <a class="boton boton-claro"
-                   href="/contacto"
-                   data-i18n="ctaBoton">
-                    Contactarnos
-                </a>
-
-            </section>
-
-        </div>
-
-    </main>
-
-    <footer>
-
-        <div class="footer-grid">
-
-            <div>
-                <h3 data-i18n="footerTitulo">🐾 Veterinaria Huellitas</h3>
-
-                <p data-i18n="footerDescripcion">
-                    Cuidamos a tu mascota con atención cercana,
-                    prevención y bienestar.
-                </p>
-            </div>
-
-            <div>
-                <h3 data-i18n="footerExplorar">Explorar</h3>
-
-                <a href="/servicios" data-i18n="menuServicios">
-                    Servicios
-                </a>
-
-                <a href="/registro" data-i18n="menuRegistro">
-                    Registrar mascota
-                </a>
-
-                <a href="/contacto" data-i18n="menuContacto">
-                    Contacto
-                </a>
-            </div>
-
-            <div>
-                <h3 data-i18n="footerContacto">Contacto</h3>
-
-                <p data-i18n="footerTelefono"> 8888-8888</p>
-
-                <p data-i18n="footerCorreo">
-                    veterinaria@huellitas.com
+                <p data-i18n="ctaTexto">
+                    Cuéntanos qué necesitas y te orientamos.
                 </p>
 
-                <p data-i18n="footerUbicacion">
-                     Pérez Zeledón, Costa Rica
-                </p>
             </div>
 
-        </div>
+            <a class="boton boton-claro"
+               href="/contacto"
+               data-i18n="ctaBoton">
+                Contactarnos
+            </a>
 
-        <div class="footer-copy">
+        </section>
 
-            <p class="footer-clinica"
-               data-i18n="footerCopy">
-                © 2026 Clínica Veterinaria Huellitas
-            </p>
+    </div>
 
-            <p class="creditos"
-               data-i18n="footerCreditos">
-                Diseño y desarrollo web por Joseph Navarro
+</main>
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3 data-i18n="footerTitulo">
+                🐾 Veterinaria Huellitas
+            </h3>
+
+            <p data-i18n="footerDescripcion">
+                Cuidamos a tu mascota con atención cercana,
+                prevención y bienestar.
             </p>
 
         </div>
 
-    </footer>
+        <div>
 
-    <a class="whatsapp-flotante"
-       href="https://wa.me/50688888888"
-       target="_blank"
-       aria-label="Contactar por WhatsApp">
-        💬
-    </a>
+            <h3 data-i18n="footerExplorar">
+                Explorar
+            </h3>
 
-    <button class="arriba"
-            type="button"
-            aria-label="Volver arriba">
-        ↑
-    </button>
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
 
-    <script src="/js/script.js"></script>
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
+
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3 data-i18n="footerContacto">
+                Contacto
+            </h3>
+
+            <p data-i18n="footerTelefono">
+                8888-8888
+            </p>
+
+            <p data-i18n="footerCorreo">
+                veterinaria@huellitas.com
+            </p>
+
+            <p data-i18n="footerUbicacion">
+                Pérez Zeledón, Costa Rica
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copy">
+
+        <p class="footer-clinica"
+           data-i18n="footerCopy">
+            © 2026 Clínica Veterinaria Huellitas
+        </p>
+
+        <p class="creditos"
+           data-i18n="footerCreditos">
+            Diseño y desarrollo web por Joseph Navarro
+        </p>
+
+    </div>
+
+</footer>
+
+<a class="whatsapp-flotante"
+   href="https://wa.me/50688888888"
+   target="_blank"
+   aria-label="Contactar por WhatsApp">
+    💬
+</a>
+
+<button class="arriba"
+        type="button"
+        aria-label="Volver arriba">
+    ↑
+</button>
+
+<script src="/js/script.js"></script>
 
 </body>
 </html>
