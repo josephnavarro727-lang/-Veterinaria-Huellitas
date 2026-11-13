@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | Veterinaria Huellitas</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #edf5f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .contenedor {
+            display: flex;
+            width: 100%;
+            max-width: 1050px;
+            min-height: 590px;
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.10);
+        }
+
+        .imagen {
+            width: 48%;
+            background:
+                    linear-gradient(
+                            rgba(9, 65, 43, 0.25),
+                            rgba(9, 65, 43, 0.55)
+                    ),
+                    url('/veterinaria.png');
+
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 35px;
+            color: white;
+        }
+
+        .imagen h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .formulario {
+            width: 52%;
+            padding: 65px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+        }
+
+        h1 {
+            color: #124b38;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            color: #666;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #244538;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccd9d0;
+            border-radius: 9px;
+            margin-bottom: 22px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #21845b;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #167347;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #105737;
+        }
+
+        .mensaje {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .error {
+            background: #ffe8e8;
+            color: #a42828;
+        }
+
+        .exito {
+            background: #e4f5e9;
+            color: #16613b;
+        }
+
+        .volver {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .volver a {
+            color: #167347;
+            text-decoration: none;
+        }
+
+        @media (max-width: 750px) {
+            .imagen {
+                display: none;
+            }
+
+            .formulario {
+                width: 100%;
+                padding: 35px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="imagen">
+        <div>
+            <h2>Veterinaria Huellitas</h2>
+            <p>Cuidamos a quienes más quieres.</p>
+        </div>
+    </div>
+
+    <div class="formulario">
+
+        <div class="logo">
+            <img src="/Huellitas.png"
+                 alt="Logo Veterinaria Huellitas">
+        </div>
+
+        <h1>Iniciar sesión</h1>
+
+        <p class="subtitulo">
+            Accede al sistema de gestión veterinaria
+        </p>
+
+        <div th:if="${param.error}"
+             class="mensaje error">
+            Usuario o contraseña incorrectos,
+            o cuenta desactivada.
+        </div>
+
+        <div th:if="${param.logout}"
+             class="mensaje exito">
+            Sesión cerrada correctamente.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+
+            <label for="username">Usuario</label>
+
+            <input type="text"
+                   id="username"
+                   name="username"
+                   placeholder="Ingrese su usuario"
+                   autocomplete="username"
+                   required>
+
+            <label for="password">Contraseña</label>
+
+            <input type="password"
+                   id="password"
+                   name="password"
+                   placeholder="Ingrese su contraseña"
+                   autocomplete="current-password"
+                   required>
+
+            <button type="submit">
+                Ingresar
+            </button>
+
+        </form>
+
+        <div class="volver">
+            <a th:href="@{/}">
+                Volver al inicio
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

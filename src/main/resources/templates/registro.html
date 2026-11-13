@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,420 +13,850 @@
 
 <body>
 
-
-    <div class="topbar">
-        <div class="topbar-contenido">
-            <span data-i18n="topTelefono"> 8888-8888</span>
-            <span data-i18n="topHorario"> Lun–Sáb · 8:00 a. m. – 6:00 p. m.</span>
-            <span data-i18n="topUbicacion"> Pérez Zeledón, Costa Rica</span>
-        </div>
+<div class="topbar">
+    <div class="topbar-contenido">
+        <span data-i18n="topTelefono">8888-8888</span>
+        <span data-i18n="topHorario">
+                Lun–Sáb · 8:00 a. m. – 6:00 p. m.
+            </span>
+        <span data-i18n="topUbicacion">
+                Pérez Zeledón, Costa Rica
+            </span>
     </div>
+</div>
 
+<header class="encabezado-principal">
+    <div class="barra-navegacion">
 
-    <header class="encabezado-principal">
-        <div class="barra-navegacion">
-
-            <a class="marca" href="/" aria-label="Ir al inicio">
-                <span class="marca-icono"><img src="/Huellitas.png" alt="Huellitas"></span>
-
-                <span>
-                    <strong data-i18n="marcaNombre">Veterinaria Huellitas</strong>
-                    <small data-i18n="marcaSubtitulo">Salud y bienestar animal</small>
+        <a class="marca" href="/" aria-label="Ir al inicio">
+                <span class="marca-icono">
+                    <img src="/Huellitas.png" alt="Huellitas">
                 </span>
+
+            <span>
+                    <strong data-i18n="marcaNombre">
+                        Veterinaria Huellitas
+                    </strong>
+                    <small data-i18n="marcaSubtitulo">
+                        Salud y bienestar animal
+                    </small>
+                </span>
+        </a>
+
+        <button class="menu-btn"
+                type="button"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="menu-principal">
+
+            <a href="/" data-i18n="menuInicio">
+                Inicio
             </a>
 
-            <button class="menu-btn"
-                    type="button"
-                    aria-label="Abrir menú"
-                    aria-expanded="false">
-                ☰
-            </button>
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
 
-                    <nav class="menu-principal">
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
 
-                        <a href="/"
-                        data-i18n="menuInicio">
-                            Inicio
-                        </a>
+            <a href="/citas" data-i18n="menuCitas">
+                Agendar cita
+            </a>
 
-                        <a href="/servicios"
-                        data-i18n="menuServicios">
-                            Servicios
-                        </a>
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
 
-                        <a href="/registro"
-                        data-i18n="menuRegistro">
-                            Registrar mascota
-                        </a>
+            <a href="/login" class="boton-login">
+                Iniciar sesión
+            </a>
 
-                        <a href="/citas"
-                        data-i18n="menuCitas">
-                            Agendar cita
-                        </a>
+            <div class="selector-idioma">
+                <select id="selectorIdioma">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
 
-                        <a href="/contacto"
-                        data-i18n="menuContacto">
-                            Contacto
-                        </a>
+        </nav>
 
-                        <div class="selector-idioma">
+    </div>
+</header>
 
-                            <select id="selectorIdioma">
+<main>
 
-                                <option value="es">
-                                    ES
+    <div class="contenedor">
+
+        <section class="cabecera-pagina cabecera-registro revelar">
+
+            <div class="registro-presentacion">
+
+                <img class="imagen-datos"
+                     src="/datos.png"
+                     alt="Registro de mascota">
+
+                <div>
+
+                        <span class="mini" data-i18n="registroMini">
+                            REGISTRO DE MASCOTAS
+                        </span>
+
+                    <h1 data-i18n="registroTitulo">
+                        Registra a tu mascota
+                    </h1>
+
+                    <p data-i18n="registroIntro">
+                        Completa los datos del responsable y de tu mascota
+                        para crear su registro en Clínica Veterinaria Huellitas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="seccion limpia revelar">
+
+            <form class="formulario formulario-amplio"
+                  id="formRegistro">
+
+                <fieldset>
+
+                    <legend data-i18n="registroResponsable">
+                        Datos del responsable
+                    </legend>
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="dueno"
+                                   data-i18n="labelDueno">
+                                Nombre del dueño
+                            </label>
+
+                            <input type="text"
+                                   id="dueno"
+                                   name="dueno"
+                                   placeholder="Digite el nombre"
+                                   data-i18n-placeholder="phDueno"
+                                   required>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="cedula"
+                                   data-i18n="labelCedula">
+                                Cédula
+                            </label>
+
+                            <input type="text"
+                                   id="cedula"
+                                   name="cedula"
+                                   placeholder="Digite la cédula"
+                                   data-i18n-placeholder="phCedula"
+                                   required>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="telefono"
+                                   data-i18n="labelTelefono">
+                                Teléfono
+                            </label>
+
+                            <input type="tel"
+                                   id="telefono"
+                                   name="telefono"
+                                   placeholder="8888-8888">
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="correo"
+                                   data-i18n="labelCorreo">
+                                Correo electrónico
+                            </label>
+
+                            <input type="email"
+                                   id="correo"
+                                   name="correo"
+                                   placeholder="ejemplo@correo.com"
+                                   data-i18n-placeholder="phCorreo">
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+
+                    <legend data-i18n="registroMascota">
+                        Datos de la mascota
+                    </legend>
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="mascota"
+                                   data-i18n="labelMascota">
+                                Nombre de la mascota
+                            </label>
+
+                            <input type="text"
+                                   id="mascota"
+                                   name="mascota"
+                                   placeholder="Nombre de la mascota"
+                                   data-i18n-placeholder="phMascota"
+                                   required>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="tipo"
+                                   data-i18n="labelTipo">
+                                Tipo de mascota
+                            </label>
+
+                            <select id="tipo"
+                                    name="tipo"
+                                    required>
+
+                                <option value=""
+                                        data-i18n="opSeleccione">
+                                    Seleccione
                                 </option>
 
-                                <option value="en">
-                                    EN
+                                <option value="Perro"
+                                        data-i18n="opPerro">
+                                    Perro
+                                </option>
+
+                                <option value="Gato"
+                                        data-i18n="opGato">
+                                    Gato
+                                </option>
+
+                                <option value="Ave"
+                                        data-i18n="opAve">
+                                    Ave
+                                </option>
+
+                                <option value="Otro"
+                                        data-i18n="opOtro">
+                                    Otro
                                 </option>
 
                             </select>
 
                         </div>
 
-                    </nav>
+                        <div class="campo">
 
-        </div>
-    </header>
+                            <label for="raza"
+                                   data-i18n="labelRaza">
+                                Raza
+                            </label>
 
-    <main>
-
-        <div class="contenedor">
-
-            <section class="cabecera-pagina cabecera-registro revelar">
-
-                <div class="registro-presentacion">
-
-                    <img class="imagen-datos"
-                        src="/datos.png"
-                        alt="Registro de mascota">
-
-                    <div>
-
-                        <span class="mini"
-                            data-i18n="registroMini">
-                            REGISTRO DE MASCOTAS
-                        </span>
-
-                        <h1 data-i18n="registroTitulo">
-                            Registra a tu mascota
-                        </h1>
-
-                        <p data-i18n="registroIntro">
-                            Completa los datos del responsable y de tu mascota
-                            para crear su registro en Clínica Veterinaria Huellitas.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <section class="seccion limpia revelar">
-
-                <form class="formulario formulario-amplio"
-                      id="formRegistro">
-
-                    <fieldset>
-
-                        <legend data-i18n="registroResponsable">
-                            Datos del responsable
-                        </legend>
-
-
-                        <div class="form-grid">
-
-                            <div class="campo">
-
-                                <label for="dueno"
-                                       data-i18n="labelDueno">
-                                    Nombre del dueño
-                                </label>
-
-                                <input type="text"
-                                       id="dueno"
-                                       name="dueno"
-                                       placeholder="Digite el nombre"
-                                       data-i18n-placeholder="phDueno"
-                                       required>
-
-                            </div>
-
-
-                            <div class="campo">
-
-                                <label for="cedula"
-                                       data-i18n="labelCedula">
-                                    Cédula
-                                </label>
-
-                                <input type="text"
-                                       id="cedula"
-                                       name="cedula"
-                                       placeholder="Digite la cédula"
-                                       data-i18n-placeholder="phCedula"
-                                       required>
-
-                            </div>
-
-
-                            <div class="campo">
-
-                                <label for="telefono"
-                                       data-i18n="labelTelefono">
-                                    Teléfono
-                                </label>
-
-                                <input type="tel"
-                                       id="telefono"
-                                       name="telefono"
-                                       placeholder="8888-8888">
-
-                            </div>
-
-
-                            <div class="campo">
-
-                                <label for="correo"
-                                       data-i18n="labelCorreo">
-                                    Correo electrónico
-                                </label>
-
-                                <input type="email"
-                                       id="correo"
-                                       name="correo"
-                                       placeholder="ejemplo@correo.com"
-                                       data-i18n-placeholder="phCorreo">
-
-                            </div>
+                            <input type="text"
+                                   id="raza"
+                                   name="raza"
+                                   placeholder="Ejemplo: Labrador"
+                                   data-i18n-placeholder="phRaza">
 
                         </div>
-
-                    </fieldset>
-
-
-                    <fieldset>
-
-                        <legend data-i18n="registroMascota">
-                            Datos de la mascota
-                        </legend>
-
-
-                        <div class="form-grid">
-
-                            <div class="campo">
-
-                                <label for="mascota"
-                                       data-i18n="labelMascota">
-                                    Nombre de la mascota
-                                </label>
-
-                                <input type="text"
-                                       id="mascota"
-                                       name="mascota"
-                                       placeholder="Nombre de la mascota"
-                                       data-i18n-placeholder="phMascota"
-                                       required>
-
-                            </div>
-
-
-                            <div class="campo">
-
-                                <label for="tipo"
-                                       data-i18n="labelTipo">
-                                    Tipo de mascota
-                                </label>
-
-                                <select id="tipo"
-                                        name="tipo"
-                                        required>
-
-                                    <option value=""
-                                            data-i18n="opSeleccione">
-                                        Seleccione
-                                    </option>
-
-                                    <option value="Perro"
-                                            data-i18n="opPerro">
-                                        Perro
-                                    </option>
-
-                                    <option value="Gato"
-                                            data-i18n="opGato">
-                                        Gato
-                                    </option>
-
-                                    <option value="Ave"
-                                            data-i18n="opAve">
-                                        Ave
-                                    </option>
-
-                                    <option value="Otro"
-                                            data-i18n="opOtro">
-                                        Otro
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="campo">
-
-                                <label for="raza"
-                                       data-i18n="labelRaza">
-                                    Raza
-                                </label>
-
-                                <input type="text"
-                                       id="raza"
-                                       name="raza"
-                                       placeholder="Ejemplo: Labrador"
-                                       data-i18n-placeholder="phRaza">
-
-                            </div>
-
-
-                            <div class="campo">
-
-                                <label for="edad"
-                                       data-i18n="labelEdad">
-                                    Edad
-                                </label>
-
-                                <input type="number"
-                                       id="edad"
-                                       name="edad"
-                                       min="0"
-                                       placeholder="Edad"
-                                       data-i18n-placeholder="phEdad">
-
-                            </div>
-
-                        </div>
-
 
                         <div class="campo">
 
-                            <label for="observaciones"
-                                   data-i18n="labelObservaciones">
-                                Observaciones
+                            <label for="edad"
+                                   data-i18n="labelEdad">
+                                Edad
                             </label>
 
-                            <textarea id="observaciones"
-                                      name="observaciones"
-                                      rows="5"
-                                      placeholder="Alergias, cuidados especiales u otra información"
-                                      data-i18n-placeholder="phObservaciones"></textarea>
+                            <input type="number"
+                                   id="edad"
+                                   name="edad"
+                                   min="0"
+                                   placeholder="Edad"
+                                   data-i18n-placeholder="phEdad">
 
                         </div>
 
-                    </fieldset>
+                    </div>
 
+                    <div class="campo">
 
-                    <div class="acciones-form">
+                        <label for="observaciones"
+                               data-i18n="labelObservaciones">
+                            Observaciones
+                        </label>
 
-                        <button type="reset"
-                                class="boton boton-secundario"
-                                data-i18n="botonLimpiar">
-                            Limpiar
-                        </button>
-
-                        <button type="submit"
-                                class="boton boton-principal"
-                                data-i18n="botonRegistrar">
-                            Registrar mascota
-                        </button>
+                        <textarea id="observaciones"
+                                  name="observaciones"
+                                  rows="5"
+                                  placeholder="Alergias, cuidados especiales u otra información"
+                                  data-i18n-placeholder="phObservaciones"></textarea>
 
                     </div>
 
-                </form>
+                </fieldset>
 
-            </section>
+                <div class="acciones-form">
 
-        </div>
+                    <button type="reset"
+                            class="boton boton-secundario"
+                            data-i18n="botonLimpiar">
+                        Limpiar
+                    </button>
 
-    </main>
+                    <button type="submit"
+                            class="boton boton-principal"
+                            data-i18n="botonRegistrar">
+                        Registrar mascota
+                    </button>
 
-    <footer>
+                </div>
 
-        <div class="footer-grid">
+            </form>
 
-            <div>
-                <h3 data-i18n="footerTitulo">🐾 Veterinaria Huellitas</h3>
+        </section>
 
-                <p data-i18n="footerDescripcion">
-                    Cuidamos a tu mascota con atención cercana,
-                    prevención y bienestar.
-                </p>
-            </div>
+    </div>
 
-            <div>
-                <h3 data-i18n="footerExplorar">Explorar</h3>
+</main>
 
-                <a href="/servicios" data-i18n="menuServicios">
-                    Servicios
-                </a>
+<footer>
 
-                <a href="/registro" data-i18n="menuRegistro">
-                    Registrar mascota
-                </a>
+    <div class="footer-grid">
 
-                <a href="/contacto" data-i18n="menuContacto">
-                    Contacto
-                </a>
-            </div>
+        <div>
 
-            <div>
-                <h3 data-i18n="footerContacto">Contacto</h3>
+            <h3 data-i18n="footerTitulo">
+                🐾 Veterinaria Huellitas
+            </h3>
 
-                <p data-i18n="footerTelefono">📞 8888-8888</p>
-
-                <p data-i18n="footerCorreo">
-                    ✉️ veterinaria@huellitas.com
-                </p>
-
-                <p data-i18n="footerUbicacion">
-                    📍 Pérez Zeledón, Costa Rica
-                </p>
-            </div>
-
-        </div>
-
-        <div class="footer-copy">
-
-            <p class="footer-clinica"
-               data-i18n="footerCopy">
-                © 2026 Clínica Veterinaria Huellitas
-            </p>
-
-            <p class="creditos"
-               data-i18n="footerCreditos">
-                Diseño y desarrollo web por Joseph Navarro
+            <p data-i18n="footerDescripcion">
+                Cuidamos a tu mascota con atención cercana,
+                prevención y bienestar.
             </p>
 
         </div>
 
-    </footer>
+        <div>
 
-    <a class="whatsapp-flotante"
-       href="https://wa.me/50688888888"
-       target="_blank"
-       aria-label="Contactar por WhatsApp">
-        💬
-    </a>
+            <h3 data-i18n="footerExplorar">
+                Explorar
+            </h3>
 
-    <button class="arriba"
-            type="button"
-            aria-label="Volver arriba">
-        ↑
-    </button>
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
 
-    <script src="/js/script.js"></script>
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
+
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3 data-i18n="footerContacto">
+                Contacto
+            </h3>
+
+            <p data-i18n="footerTelefono">
+                📞 8888-8888
+            </p>
+
+            <p data-i18n="footerCorreo">
+                ✉️ veterinaria@huellitas.com
+            </p>
+
+            <p data-i18n="footerUbicacion">
+                📍 Pérez Zeledón, Costa Rica
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copy">
+
+        <p class="footer-clinica"
+           data-i18n="footerCopy">
+            © 2026 Clínica Veterinaria Huellitas
+        </p>
+
+        <p class="creditos"
+           data-i18n="footerCreditos">
+            Diseño y desarrollo web por Joseph Navarro
+        </p>
+
+    </div>
+
+</footer>
+
+<a class="whatsapp-flotante"
+   href="https://wa.me/50688888888"
+   target="_blank"
+   aria-label="Contactar por WhatsApp">
+    💬
+</a>
+
+<button class="arriba"
+        type="button"
+        aria-label="Volver arriba">
+    ↑
+</button>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Veterinaria Huellitas: atención, prevención y bienestar para tus mascotas.">
+    <link rel="icon" href="/HuellitasIcono.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/estilos.css">
+    <title>Registrar mascota | Veterinaria Huellitas</title>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="topbar-contenido">
+        <span data-i18n="topTelefono">8888-8888</span>
+        <span data-i18n="topHorario">
+                Lun–Sáb · 8:00 a. m. – 6:00 p. m.
+            </span>
+        <span data-i18n="topUbicacion">
+                Pérez Zeledón, Costa Rica
+            </span>
+    </div>
+</div>
+
+<header class="encabezado-principal">
+    <div class="barra-navegacion">
+
+        <a class="marca" href="/" aria-label="Ir al inicio">
+                <span class="marca-icono">
+                    <img src="/Huellitas.png" alt="Huellitas">
+                </span>
+
+            <span>
+                    <strong data-i18n="marcaNombre">
+                        Veterinaria Huellitas
+                    </strong>
+                    <small data-i18n="marcaSubtitulo">
+                        Salud y bienestar animal
+                    </small>
+                </span>
+        </a>
+
+        <button class="menu-btn"
+                type="button"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="menu-principal">
+
+            <a href="/" data-i18n="menuInicio">
+                Inicio
+            </a>
+
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
+
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
+
+            <a href="/citas" data-i18n="menuCitas">
+                Agendar cita
+            </a>
+
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
+
+            <a href="/login" class="boton-login">
+                Iniciar sesión
+            </a>
+
+            <div class="selector-idioma">
+                <select id="selectorIdioma">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <div class="contenedor">
+
+        <section class="cabecera-pagina cabecera-registro revelar">
+
+            <div class="registro-presentacion">
+
+                <img class="imagen-datos"
+                     src="/datos.png"
+                     alt="Registro de mascota">
+
+                <div>
+
+                        <span class="mini" data-i18n="registroMini">
+                            REGISTRO DE MASCOTAS
+                        </span>
+
+                    <h1 data-i18n="registroTitulo">
+                        Registra a tu mascota
+                    </h1>
+
+                    <p data-i18n="registroIntro">
+                        Completa los datos del responsable y de tu mascota
+                        para crear su registro en Clínica Veterinaria Huellitas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="seccion limpia revelar">
+
+            <form class="formulario formulario-amplio"
+                  id="formRegistro">
+
+                <fieldset>
+
+                    <legend data-i18n="registroResponsable">
+                        Datos del responsable
+                    </legend>
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="dueno"
+                                   data-i18n="labelDueno">
+                                Nombre del dueño
+                            </label>
+
+                            <input type="text"
+                                   id="dueno"
+                                   name="dueno"
+                                   placeholder="Digite el nombre"
+                                   data-i18n-placeholder="phDueno"
+                                   required>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="cedula"
+                                   data-i18n="labelCedula">
+                                Cédula
+                            </label>
+
+                            <input type="text"
+                                   id="cedula"
+                                   name="cedula"
+                                   placeholder="Digite la cédula"
+                                   data-i18n-placeholder="phCedula"
+                                   required>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="telefono"
+                                   data-i18n="labelTelefono">
+                                Teléfono
+                            </label>
+
+                            <input type="tel"
+                                   id="telefono"
+                                   name="telefono"
+                                   placeholder="8888-8888">
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="correo"
+                                   data-i18n="labelCorreo">
+                                Correo electrónico
+                            </label>
+
+                            <input type="email"
+                                   id="correo"
+                                   name="correo"
+                                   placeholder="ejemplo@correo.com"
+                                   data-i18n-placeholder="phCorreo">
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+
+                    <legend data-i18n="registroMascota">
+                        Datos de la mascota
+                    </legend>
+
+                    <div class="form-grid">
+
+                        <div class="campo">
+
+                            <label for="mascota"
+                                   data-i18n="labelMascota">
+                                Nombre de la mascota
+                            </label>
+
+                            <input type="text"
+                                   id="mascota"
+                                   name="mascota"
+                                   placeholder="Nombre de la mascota"
+                                   data-i18n-placeholder="phMascota"
+                                   required>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="tipo"
+                                   data-i18n="labelTipo">
+                                Tipo de mascota
+                            </label>
+
+                            <select id="tipo"
+                                    name="tipo"
+                                    required>
+
+                                <option value=""
+                                        data-i18n="opSeleccione">
+                                    Seleccione
+                                </option>
+
+                                <option value="Perro"
+                                        data-i18n="opPerro">
+                                    Perro
+                                </option>
+
+                                <option value="Gato"
+                                        data-i18n="opGato">
+                                    Gato
+                                </option>
+
+                                <option value="Ave"
+                                        data-i18n="opAve">
+                                    Ave
+                                </option>
+
+                                <option value="Otro"
+                                        data-i18n="opOtro">
+                                    Otro
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="raza"
+                                   data-i18n="labelRaza">
+                                Raza
+                            </label>
+
+                            <input type="text"
+                                   id="raza"
+                                   name="raza"
+                                   placeholder="Ejemplo: Labrador"
+                                   data-i18n-placeholder="phRaza">
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="edad"
+                                   data-i18n="labelEdad">
+                                Edad
+                            </label>
+
+                            <input type="number"
+                                   id="edad"
+                                   name="edad"
+                                   min="0"
+                                   placeholder="Edad"
+                                   data-i18n-placeholder="phEdad">
+
+                        </div>
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label for="observaciones"
+                               data-i18n="labelObservaciones">
+                            Observaciones
+                        </label>
+
+                        <textarea id="observaciones"
+                                  name="observaciones"
+                                  rows="5"
+                                  placeholder="Alergias, cuidados especiales u otra información"
+                                  data-i18n-placeholder="phObservaciones"></textarea>
+
+                    </div>
+
+                </fieldset>
+
+                <div class="acciones-form">
+
+                    <button type="reset"
+                            class="boton boton-secundario"
+                            data-i18n="botonLimpiar">
+                        Limpiar
+                    </button>
+
+                    <button type="submit"
+                            class="boton boton-principal"
+                            data-i18n="botonRegistrar">
+                        Registrar mascota
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h3 data-i18n="footerTitulo">
+                🐾 Veterinaria Huellitas
+            </h3>
+
+            <p data-i18n="footerDescripcion">
+                Cuidamos a tu mascota con atención cercana,
+                prevención y bienestar.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3 data-i18n="footerExplorar">
+                Explorar
+            </h3>
+
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
+
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
+
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3 data-i18n="footerContacto">
+                Contacto
+            </h3>
+
+            <p data-i18n="footerTelefono">
+                📞 8888-8888
+            </p>
+
+            <p data-i18n="footerCorreo">
+                ✉️ veterinaria@huellitas.com
+            </p>
+
+            <p data-i18n="footerUbicacion">
+                📍 Pérez Zeledón, Costa Rica
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copy">
+
+        <p class="footer-clinica"
+           data-i18n="footerCopy">
+            © 2026 Clínica Veterinaria Huellitas
+        </p>
+
+        <p class="creditos"
+           data-i18n="footerCreditos">
+            Diseño y desarrollo web por Joseph Navarro
+        </p>
+
+    </div>
+
+</footer>
+
+<a class="whatsapp-flotante"
+   href="https://wa.me/50688888888"
+   target="_blank"
+   aria-label="Contactar por WhatsApp">
+    💬
+</a>
+
+<button class="arriba"
+        type="button"
+        aria-label="Volver arriba">
+    ↑
+</button>
+
+<script src="/js/script.js"></script>
 
 </body>
 </html>

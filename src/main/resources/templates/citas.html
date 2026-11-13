@@ -1,71 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Agendar cita en Clínica Veterinaria Huellitas">
-
-    <link rel="icon"
-          href="/HuellitasIcono.ico"
-          type="image/x-icon">
-
-    <link rel="stylesheet"
-          href="/estilos.css">
-
-    <title>
-        Agendar cita | Veterinaria Huellitas
-    </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agendar cita en Clínica Veterinaria Huellitas">
+    <link rel="icon" href="/HuellitasIcono.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/estilos.css">
+    <title>Agendar cita | Veterinaria Huellitas</title>
 </head>
 
 <body>
 
-
-
-    <div class="topbar">
-
-        <div class="topbar-contenido">
+<div class="topbar">
+    <div class="topbar-contenido">
 
             <span data-i18n="topTelefono">
                 8888-8888
             </span>
 
-            <span data-i18n="topHorario">
+        <span data-i18n="topHorario">
                 Lun–Sáb · 8:00 a. m. – 6:00 p. m.
             </span>
 
-            <span data-i18n="topUbicacion">
+        <span data-i18n="topUbicacion">
                 Pérez Zeledón, Costa Rica
             </span>
 
-        </div>
-
     </div>
+</div>
 
+<header class="encabezado-principal">
 
-    <header class="encabezado-principal">
+    <div class="barra-navegacion">
 
-        <div class="barra-navegacion">
-
-            <a class="marca"
-               href="/"
-               aria-label="Ir al inicio">
+        <a class="marca"
+           href="/"
+           aria-label="Ir al inicio">
 
                 <span class="marca-icono">
-
-                    <img src="/Huellitas.png"
-                         alt="Huellitas">
-
+                    <img src="/Huellitas.png" alt="Huellitas">
                 </span>
 
-                <span>
-
+            <span>
                     <strong data-i18n="marcaNombre">
                         Veterinaria Huellitas
                     </strong>
@@ -73,467 +51,324 @@
                     <small data-i18n="marcaSubtitulo">
                         Salud y bienestar animal
                     </small>
-
                 </span>
 
+        </a>
+
+        <button class="menu-btn"
+                type="button"
+                aria-label="Abrir menú"
+                aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="menu-principal">
+
+            <a href="/" data-i18n="menuInicio">
+                Inicio
             </a>
 
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
 
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
 
+            <a href="/citas"
+               data-i18n="menuCitas"
+               class="activo">
+                Agendar cita
+            </a>
 
-            <button class="menu-btn"
-                    type="button"
-                    aria-label="Abrir menú"
-                    aria-expanded="false">
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
 
-                ☰
+            <a href="/login" class="boton-login">
+                Iniciar sesión
+            </a>
 
-            </button>
+            <div class="selector-idioma">
 
+                <span aria-hidden="true"></span>
 
+                <select id="selectorIdioma"
+                        aria-label="Seleccionar idioma">
 
-            <nav class="menu-principal">
+                    <option value="es">
+                        ES
+                    </option>
 
-                <a href="/"
-                   data-i18n="menuInicio">
+                    <option value="en">
+                        EN
+                    </option>
 
-                    Inicio
+                </select>
 
-                </a>
+            </div>
 
+        </nav>
 
-                <a href="/servicios"
-                   data-i18n="menuServicios">
+    </div>
 
-                    Servicios
+</header>
 
-                </a>
+<main>
 
+    <div class="contenedor">
 
-                <a href="/registro"
-                   data-i18n="menuRegistro">
+        <section class="cabecera-pagina revelar">
 
-                    Registrar mascota
-
-                </a>
-
-
-                <a href="/citas"
-                   data-i18n="menuCitas"
-                   class="activo">
-
-                    Agendar cita
-
-                </a>
-
-
-                <a href="/contacto"
-                   data-i18n="menuContacto">
-
-                    Contacto
-
-                </a>
-
-
-
-                <div class="selector-idioma">
-
-                    <span aria-hidden="true"></span>
-
-                    <select id="selectorIdioma"
-                            aria-label="Seleccionar idioma">
-
-                        <option value="es">
-                            ES
-                        </option>
-
-                        <option value="en">
-                            EN
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-
-    <main>
-
-        <div class="contenedor">
-
-
-
-            <section class="cabecera-pagina revelar">
-
-                <span class="mini"
-                      data-i18n="citasMini">
-
+                <span class="mini" data-i18n="citasMini">
                     CITAS
-
                 </span>
 
+            <h1 data-i18n="citasTitulo">
+                Agenda una cita para tu mascota
+            </h1>
 
-                <h1 data-i18n="citasTitulo">
+            <p data-i18n="citasIntro">
+                Selecciona la mascota, el servicio,
+                la fecha y la hora de atención.
+            </p>
 
-                    Agenda una cita para tu mascota
+        </section>
 
-                </h1>
+        <section class="seccion limpia revelar">
 
+            <form id="formCita"
+                  class="formulario formulario-amplio">
 
-                <p data-i18n="citasIntro">
+                <fieldset>
 
-                    Selecciona la mascota, el servicio,
-                    la fecha y la hora de atención.
+                    <legend data-i18n="citasPropietario">
+                        Datos del propietario
+                    </legend>
 
-                </p>
+                    <div class="campo">
 
-            </section>
+                        <label for="cedulaCita"
+                               data-i18n="citasCedula">
+                            Cédula del propietario
+                        </label>
 
+                        <input type="text"
+                               id="cedulaCita"
+                               name="cedula"
+                               placeholder="Digite la cédula"
+                               data-i18n-placeholder="citasPlaceholderCedula"
+                               required>
 
+                    </div>
 
-            <section class="seccion limpia revelar">
+                    <button type="button"
+                            id="btnBuscarMascotas"
+                            class="boton boton-secundario"
+                            data-i18n="citasBuscar">
+                        Buscar mascotas
+                    </button>
 
-                <form id="formCita"
-                      class="formulario formulario-amplio">
+                </fieldset>
 
+                <fieldset>
 
-                    <fieldset>
+                    <legend data-i18n="citasDatos">
+                        Datos de la cita
+                    </legend>
 
-                        <legend data-i18n="citasPropietario">
-
-                            Datos del propietario
-
-                        </legend>
-
+                    <div class="form-grid">
 
                         <div class="campo">
 
-                            <label for="cedulaCita"
-                                   data-i18n="citasCedula">
-
-                                Cédula del propietario
-
+                            <label for="mascotaCita"
+                                   data-i18n="citasMascota">
+                                Mascota
                             </label>
 
+                            <select id="mascotaCita"
+                                    name="id_mascota"
+                                    required>
 
-                            <input type="text"
-                                   id="cedulaCita"
-                                   name="cedula"
-                                   placeholder="Digite la cédula"
-                                   data-i18n-placeholder="citasPlaceholderCedula"
+                                <option value=""
+                                        data-i18n="citasPrimeroCedula">
+                                    Primero busque por cédula
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="servicioCita"
+                                   data-i18n="citasServicio">
+                                Servicio
+                            </label>
+
+                            <select id="servicioCita"
+                                    name="id_servicio"
+                                    required>
+
+                                <option value=""
+                                        data-i18n="citasSeleccioneServicio">
+                                    Seleccione un servicio
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="campo">
+
+                            <label for="fechaCita"
+                                   data-i18n="citasFecha">
+                                Fecha
+                            </label>
+
+                            <input type="date"
+                                   id="fechaCita"
+                                   name="fecha"
                                    required>
 
                         </div>
 
-
-                        <button type="button"
-                                id="btnBuscarMascotas"
-                                class="boton boton-secundario"
-                                data-i18n="citasBuscar">
-
-                            Buscar mascotas
-
-                        </button>
-
-                    </fieldset>
-
-
-
-                    <fieldset>
-
-                        <legend data-i18n="citasDatos">
-
-                            Datos de la cita
-
-                        </legend>
-
-
-                        <div class="form-grid">
-
-
-
-
-                            <div class="campo">
-
-                                <label for="mascotaCita"
-                                       data-i18n="citasMascota">
-
-                                    Mascota
-
-                                </label>
-
-
-                                <select id="mascotaCita"
-                                        name="id_mascota"
-                                        required>
-
-                                    <option value=""
-                                            data-i18n="citasPrimeroCedula">
-
-                                        Primero busque por cédula
-
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-
-                            <div class="campo">
-
-                                <label for="servicioCita"
-                                       data-i18n="citasServicio">
-
-                                    Servicio
-
-                                </label>
-
-
-                                <select id="servicioCita"
-                                        name="id_servicio"
-                                        required>
-
-                                    <option value=""
-                                            data-i18n="citasSeleccioneServicio">
-
-                                        Seleccione un servicio
-
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-
-                            <div class="campo">
-
-                                <label for="fechaCita"
-                                       data-i18n="citasFecha">
-
-                                    Fecha
-
-                                </label>
-
-
-                                <input type="date"
-                                       id="fechaCita"
-                                       name="fecha"
-                                       required>
-
-                            </div>
-
-
-
-                            <div class="campo">
-
-                                <label for="horaCita"
-                                       data-i18n="citasHora">
-
-                                    Hora
-
-                                </label>
-
-
-                                <input type="time"
-                                       id="horaCita"
-                                       name="hora"
-                                       required>
-
-                            </div>
-
-
-                        </div>
-
-
-
-
                         <div class="campo">
 
-                            <label for="observacionesCita"
-                                   data-i18n="citasObservaciones">
-
-                                Observaciones
-
+                            <label for="horaCita"
+                                   data-i18n="citasHora">
+                                Hora
                             </label>
 
-
-                            <textarea id="observacionesCita"
-                                      name="observaciones"
-                                      rows="5"
-                                      placeholder="Indique cualquier detalle importante"
-                                      data-i18n-placeholder="citasPlaceholderObservaciones"></textarea>
+                            <input type="time"
+                                   id="horaCita"
+                                   name="hora"
+                                   required>
 
                         </div>
-
-                    </fieldset>
-
-
-
-                    <div class="acciones-form">
-
-
-                        <button type="reset"
-                                class="boton boton-secundario"
-                                data-i18n="citasLimpiar">
-
-                            Limpiar
-
-                        </button>
-
-
-                        <button type="submit"
-                                class="boton boton-principal"
-                                data-i18n="citasAgendar">
-
-                            Agendar cita
-
-                        </button>
-
 
                     </div>
 
+                    <div class="campo">
 
-                </form>
+                        <label for="observacionesCita"
+                               data-i18n="citasObservaciones">
+                            Observaciones
+                        </label>
 
-            </section>
+                        <textarea id="observacionesCita"
+                                  name="observaciones"
+                                  rows="5"
+                                  placeholder="Indique cualquier detalle importante"
+                                  data-i18n-placeholder="citasPlaceholderObservaciones"></textarea>
 
-        </div>
+                    </div>
 
-    </main>
+                </fieldset>
 
+                <div class="acciones-form">
 
+                    <button type="reset"
+                            class="boton boton-secundario"
+                            data-i18n="citasLimpiar">
+                        Limpiar
+                    </button>
 
-    <footer>
+                    <button type="submit"
+                            class="boton boton-principal"
+                            data-i18n="citasAgendar">
+                        Agendar cita
+                    </button>
 
-        <div class="footer-grid">
+                </div>
 
+            </form>
 
-            <div>
+        </section>
 
-                <h3 data-i18n="footerTitulo">
-                    Veterinaria Huellitas
-                </h3>
+    </div>
 
-                <p data-i18n="footerDescripcion">
+</main>
 
-                    Cuidamos a tu mascota con atención cercana,
-                    prevención y bienestar.
+<footer>
 
-                </p>
+    <div class="footer-grid">
 
-            </div>
+        <div>
 
+            <h3 data-i18n="footerTitulo">
+                Veterinaria Huellitas
+            </h3>
 
-            <div>
-
-                <h3 data-i18n="footerExplorar">
-
-                    Explorar
-
-                </h3>
-
-
-                <a href="/servicios"
-                   data-i18n="menuServicios">
-
-                    Servicios
-
-                </a>
-
-
-                <a href="/registro"
-                   data-i18n="menuRegistro">
-
-                    Registrar mascota
-
-                </a>
-
-
-                <a href="/citas"
-                   data-i18n="menuCitas">
-
-                    Agendar cita
-
-                </a>
-
-
-                <a href="/contacto"
-                   data-i18n="menuContacto">
-
-                    Contacto
-
-                </a>
-
-            </div>
-
-
-            <div>
-
-                <h3 data-i18n="footerContacto">
-
-                    Contacto
-
-                </h3>
-
-
-                <p data-i18n="footerTelefono">
-
-                    8888-8888
-
-                </p>
-
-
-                <p data-i18n="footerCorreo">
-
-                    veterinaria@huellitas.com
-
-                </p>
-
-
-                <p data-i18n="footerUbicacion">
-
-                    Pérez Zeledón, Costa Rica
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-copy">
-
-            <p class="footer-clinica"
-               data-i18n="footerCopy">
-
-                © 2026 Clínica Veterinaria Huellitas
-
-            </p>
-
-
-            <p class="creditos"
-               data-i18n="footerCreditos">
-
-                Diseño y desarrollo web por Joseph Navarro
-
+            <p data-i18n="footerDescripcion">
+                Cuidamos a tu mascota con atención cercana,
+                prevención y bienestar.
             </p>
 
         </div>
 
-    </footer>
+        <div>
 
+            <h3 data-i18n="footerExplorar">
+                Explorar
+            </h3>
 
-    <script src="/js/script.js"></script>
+            <a href="/servicios" data-i18n="menuServicios">
+                Servicios
+            </a>
 
+            <a href="/registro" data-i18n="menuRegistro">
+                Registrar mascota
+            </a>
+
+            <a href="/citas" data-i18n="menuCitas">
+                Agendar cita
+            </a>
+
+            <a href="/contacto" data-i18n="menuContacto">
+                Contacto
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3 data-i18n="footerContacto">
+                Contacto
+            </h3>
+
+            <p data-i18n="footerTelefono">
+                8888-8888
+            </p>
+
+            <p data-i18n="footerCorreo">
+                veterinaria@huellitas.com
+            </p>
+
+            <p data-i18n="footerUbicacion">
+                Pérez Zeledón, Costa Rica
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copy">
+
+        <p class="footer-clinica" data-i18n="footerCopy">
+            © 2026 Clínica Veterinaria Huellitas
+        </p>
+
+        <p class="creditos" data-i18n="footerCreditos">
+            Diseño y desarrollo web por Joseph Navarro
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="/js/script.js"></script>
 
 </body>
-
 </html>

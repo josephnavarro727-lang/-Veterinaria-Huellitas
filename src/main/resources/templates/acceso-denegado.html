@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso denegado | Veterinaria Huellitas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #edf5f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 45px;
+            border-radius: 18px;
+            text-align: center;
+            max-width: 450px;
+        }
+
+        h1 {
+            color: #155b40;
+        }
+
+        a {
+            display: inline-block;
+            background: #167347;
+            color: white;
+            padding: 13px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="tarjeta">
+    <h1>Acceso denegado</h1>
+
+    <p>
+        No tienes permisos para ingresar
+        a esta sección del sistema.
+    </p>
+
+    <a th:href="@{/panel}">Volver al panel</a>
+</div>
+
+</body>
+</html>
